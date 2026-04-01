@@ -503,11 +503,31 @@ footer strong{color:var(--amarillo)}
       
       <h3>Suscripción y Envío Automático (Cron Jobs)</h3>
       <p>Los gerentes logísticos no siempre tienen tiempo para acceder al dashboard a extraer datos de forma manual. Por ello, SILT integra un módulo de configuración de **"Suscripciones Automáticas"**.</p>
-      <ul style="margin-left:20px; line-height:2; margin-bottom:20px;">
-        <li>Se pueden crear reglas tipo: <em>"Generar PDF de KPIs de Mantenimiento todos los viernes a las 16:00"</em>.</li>
-        <li>El sistema enviará el reporte directamente al correo corporativo <code>@pequiven.com</code>.</li>
-        <li>Soporta envíos a grupos de distribución gerencial.</li>
-      </ul>
+      
+      <div class="mock-dashboard" style="margin:20px 0;">
+        <div class="mock-dash-header" style="background:linear-gradient(90deg, #1e293b, #0f172a);">
+          <h4 style="display:flex; align-items:center; gap:10px;">⏰ Configurar Automatización de Reportes</h4>
+        </div>
+        <div class="mock-dash-body" style="background:#f8fafc;">
+          <div style="display:flex; gap:15px; flex-wrap:wrap; margin-bottom:20px;">
+            <div style="flex:1;">
+              <label style="font-size:0.8rem; font-weight:700; color:var(--gris-medio); display:block; margin-bottom:5px;">📋 Tipo de Reporte</label>
+              <select class="toolbar-select" style="width:100%;"><option>Estadísticas de Flota y Taller</option><option>Costos Mensuales (VES/USD)</option></select>
+            </div>
+            <div style="flex:1;">
+              <label style="font-size:0.8rem; font-weight:700; color:var(--gris-medio); display:block; margin-bottom:5px;">🕒 Periodicidad de Envío</label>
+              <select class="toolbar-select" style="width:100%;"><option>Semanal (Viernes, 16:00 VET)</option><option>Mensual (Último Día, 23:59 VET)</option></select>
+            </div>
+            <div style="flex:1;">
+              <label style="font-size:0.8rem; font-weight:700; color:var(--gris-medio); display:block; margin-bottom:5px;">📧 Destinatarios (Separados por coma)</label>
+              <input type="text" class="toolbar-select" style="width:100%; border:1px solid #cbd5e1" value="gerencia.logistica@pequiven.com" readonly>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <button class="toolbar-btn primary" style="background:var(--verde); border-color:var(--verde);">Crear Tarea Automática</button>
+          </div>
+        </div>
+      </div>
 
       <h3>Reportes Georreferenciados (Rutas y Peajes)</h3>
       <p>Debido a que somos una empresa de transporte pesado a nivel nacional, la plataforma cruza los datos del Módulo de Solicitudes/Traslados para mostrar métricas críticas sobre la cartografía venezolana:</p>
@@ -525,14 +545,23 @@ footer strong{color:var(--amarillo)}
       <div class="section-header"><div class="section-num">10</div><h2>Auditoría Criptográfica y Soporte Técnico</h2></div>
       
       <h3>Trazabilidad y Log de Acciones Transparentes</h3>
-      <p>Cualquier modificación o exportación dentro del sistema deja un rastro inmutable (Log). Si se necesita presentar un reporte ante el departamento de Cumplimiento o Auditoría Interna, el reporte contendrá en su pie de página un <em>Hash de Verificación</em>:</p>
+      <p>Cualquier modificación o exportación dentro del sistema deja un rastro inmutable (Log). Si se necesita presentar un reporte ante el departamento de Cumplimiento o Auditoría Interna:</p>
       
-      <div style="background:var(--gris-oscuro); color:#fff; font-family:var(--font-code); padding:15px; border-radius:6px; font-size:0.8rem; margin:15px 0;">
-        <div style="color:#10b981; margin-bottom:8px;">[AUDIT-LOG] EXPORTACIÓN EXITOSA</div>
-        > USUARIO: j.perez@pequiven.com (Rol: Gerente Transporte)<br>
-        > ACCIÓN: Export_PDF_Costos_Marzo_2026<br>
-        > HORA SECURE_SERVER: 2026-04-01 14:02:11 VET<br>
-        > IP/TOKEN: 192.168.10.44 / Bearer eyJh...
+      <div class="mock-dashboard" style="margin:20px 0; border:1px solid #334155;">
+        <div class="mock-dash-header" style="background:#1e293b;">
+          <h4>🛡️ Visor de Logs de Transacciones [Solo Lectura]</h4>
+        </div>
+        <div class="mock-dash-body" style="padding:0; background:#0f172a;">
+          <table class="pqv-table" style="margin:0; border:none; background:transparent;">
+            <thead style="background:#334155;">
+              <tr style="color:#94a3b8;"><th style="background:transparent;">Fecha y Hora (VET)</th><th style="background:transparent;">Usuario / IP Address</th><th style="background:transparent;">Evento Crítico Registrado</th><th style="background:transparent;">Hash Autenticidad</th></tr>
+            </thead>
+            <tbody style="font-family:var(--font-code); color:#cbd5e1; font-size:0.8rem;">
+              <tr style="border-bottom:1px solid #334155;"><td style="color:#10b981;">2026-04-01 14:02:11</td><td>j.perez@pequiven.com<br><span style="color:#64748b;font-size:0.7rem;">IP: 192.168.10.44</span></td><td>📥 EXPORT_PDF_COSTOS_MAR26</td><td>0x8F4A...A1B2</td></tr>
+              <tr style="border-bottom:1px solid #334155;"><td style="color:#10b981;">2026-04-01 11:45:00</td><td>m.lopez@pequiven.com<br><span style="color:#64748b;font-size:0.7rem;">IP: 10.4.55.122</span></td><td>🔄 CAMBIO_TASA_BCV (36.42)</td><td>0x22C1...F90E</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <h3 style="margin-top:40px;">Soporte Técnico Especializado</h3>
