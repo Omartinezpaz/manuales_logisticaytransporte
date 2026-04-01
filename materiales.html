@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario — Gestión de Repuestos | SILT-PEQUIVEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── COLORES CORPORATIVOS PEQUIVEN ── */
+    --azul: #003366;           /* Primario - Header, títulos */
+    --azul-medio: #004a99;     /* Secundario - Hover, accents */
+    --azul-claro: #e8f0fb;     /* Fondo suave - Cards, hover */
+    
+    --rojo: #CF142B;           /* Alertas, énfasis, activo */
+    --rojo-claro: #fce4e7;     /* Fondo alertas */
+    
+    --amarillo: #FFD100;       /* Destacados, badges */
+    --amarillo-claro: #fffbe6; /* Fondo badges */
+    
+    /* ── NEUTROS ── */
+    --gris-oscuro: #1a1a2e;    /* Texto principal oscuro */
+    --gris-texto: #333333;     /* Texto cuerpo */
+    --gris-medio: #6b7280;     /* Texto secundario */
+    --gris-borde: #dde3ec;     /* Bordes, divisores */
+    --gris-fondo: #f4f6fb;     /* Fondo página */
+    --blanco: #ffffff;         /* Fondo cards, contenido */
+    
+    /* ── TIPOGRAFÍAS (NO CAMBIAR) ── */
+    --font-display: 'Barlow Condensed', sans-serif;    /* Títulos, navegación */
+    --font-body: 'Source Serif 4', serif;              /* Cuerpo de texto */
+    --font-code: 'JetBrains Mono', monospace;          /* Código, paths, variables */
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* RESET Y BASE */
+  /* ═══════════════════════════════════════════════════ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { 
+    font-family: var(--font-body); 
+    font-size: 16px; 
+    color: var(--gris-texto); 
+    background: var(--gris-fondo); 
+    line-height: 1.7; 
+  }
+
+  /* ── BANNER DESARROLLO ── */
+  .dev-banner { background: var(--rojo); color: #fff; text-align: center; padding: 12px; font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; letter-spacing: 0.05em; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 10px rgba(207,20,43,0.3); }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* HEADER */
+  /* ═══════════════════════════════════════════════════ */
+  .site-header { 
+    background: var(--azul); 
+    color: var(--blanco); 
+    padding: 0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+    box-shadow: 0 2px 16px rgba(0,51,102,0.18); 
+  }
+  .header-inner { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 14px 32px; 
+    gap: 20px; 
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-badge { 
+    background: var(--rojo); 
+    color: var(--blanco); 
+    font-family: var(--font-display); 
+    font-weight: 800; 
+    font-size: 1.15rem; 
+    letter-spacing: 0.08em; 
+    padding: 8px 14px; 
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%); 
+  }
+  .logo-text { 
+    font-family: var(--font-display); 
+    font-weight: 700; 
+    font-size: 1rem; 
+    letter-spacing: 0.04em; 
+    opacity: 0.9; 
+  }
+  .logo-sub { 
+    font-size: 0.72rem; 
+    opacity: 0.6; 
+    letter-spacing: 0.06em; 
+    font-family: var(--font-display); 
+    text-transform: uppercase; 
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* HERO */
+  /* ═══════════════════════════════════════════════════ */
+  .hero { 
+    color: var(--blanco); 
+    padding: 64px 32px 56px; 
+    position: relative; 
+    overflow: hidden; 
+  }
+  
+  .hero.materiales { 
+    background: linear-gradient(135deg, #1e293b 0%, #334155 60%, #475569 100%); 
+  }
+
+  .hero-inner { 
+    max-width: 860px; 
+    margin: 0 auto; 
+    position: relative; 
+    z-index: 1; 
+  }
+  .hero h1 { 
+    font-family: var(--font-display); 
+    font-size: clamp(2.4rem, 5vw, 3.8rem); 
+    font-weight: 800; 
+    line-height: 1.05; 
+    letter-spacing: -0.01em; 
+    margin-bottom: 18px; 
+  }
+  .hero h1 span { color: var(--amarillo); }
+  .hero-desc { 
+    font-size: 1.05rem; 
+    opacity: 0.78; 
+    max-width: 560px; 
+    margin-bottom: 32px; 
+    font-weight: 300; 
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* LAYOUT */
+  /* ═══════════════════════════════════════════════════ */
+  .page-body { 
+    max-width: 1280px; 
+    margin: 0 auto; 
+    padding: 40px 32px; 
+    display: grid; 
+    grid-template-columns: 260px 1fr; 
+    gap: 40px; 
+    align-items: start; 
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* SIDEBAR */
+  /* ═══════════════════════════════════════════════════ */
+  .sidebar { 
+    position: sticky; 
+    top: 72px; 
+    background: var(--blanco); 
+    border: 1px solid var(--gris-borde); 
+    border-radius: 6px; 
+    overflow: hidden; 
+    box-shadow: 0 2px 12px rgba(0,51,102,0.07); 
+  }
+  .sidebar-title { 
+    background: var(--azul); 
+    color: var(--blanco); 
+    font-family: var(--font-display); 
+    font-weight: 700; 
+    font-size: 0.8rem; 
+    letter-spacing: 0.1em; 
+    text-transform: uppercase; 
+    padding: 12px 18px; 
+  }
+  .sidebar nav { padding: 10px 0; }
+  .sidebar a { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    padding: 9px 18px; 
+    font-family: var(--font-display); 
+    font-size: 0.88rem; 
+    font-weight: 600; 
+    color: var(--gris-texto); 
+    text-decoration: none; 
+    border-left: 3px solid transparent; 
+    transition: all 0.15s; 
+  }
+  .sidebar a:hover { 
+    color: var(--azul); 
+    background: var(--azul-claro); 
+    border-left-color: var(--azul); 
+  }
+  .sidebar a.active { 
+    color: var(--rojo); 
+    background: var(--rojo-claro); 
+    border-left-color: var(--rojo); 
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* CONTENT */
+  /* ═══════════════════════════════════════════════════ */
+  .content > section { 
+    margin-bottom: 56px; 
+    padding: 24px; 
+    border-radius: 12px; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+    border: 1px solid transparent; 
+  }
+  .content > section:hover { 
+    background: var(--blanco); 
+    border-color: var(--azul-claro); 
+    box-shadow: 0 12px 40px rgba(0,51,102,0.08); 
+    transform: translateY(-4px); 
+  }
+  .section-header { 
+    display: flex; 
+    align-items: flex-end; 
+    gap: 16px; 
+    margin-bottom: 28px; 
+    border-bottom: 2px solid var(--gris-borde); 
+    padding-bottom: 14px; 
+  }
+  .section-num { 
+    font-family: var(--font-display); 
+    font-size: 3.5rem; 
+    font-weight: 800; 
+    color: var(--gris-borde); 
+    line-height: 1; 
+  }
+  h2 { 
+    font-family: var(--font-display); 
+    font-size: 1.85rem; 
+    font-weight: 800; 
+    color: var(--azul); 
+    letter-spacing: -0.01em; 
+    line-height: 1.1; 
+  }
+  h3 { 
+    font-family: var(--font-display); 
+    font-size: 1.2rem; 
+    font-weight: 700; 
+    color: var(--azul); 
+    margin: 28px 0 12px; 
+  }
+  h3::before { 
+    content: ''; 
+    width: 4px; 
+    height: 18px; 
+    background: var(--rojo); 
+    display: inline-block; 
+    border-radius: 2px; 
+    margin-right: 8px; 
+    vertical-align: middle; 
+  }
+  p { margin-bottom: 14px; }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* CARD */
+  /* ═══════════════════════════════════════════════════ */
+  .card, .pqv-card { 
+    background: var(--blanco); 
+    border: 1px solid var(--gris-borde); 
+    border-radius: 6px; 
+    padding: 24px 28px; 
+    margin-bottom: 20px; 
+    box-shadow: 0 1px 6px rgba(0,51,102,0.05); 
+  }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* FOOTER */
+  /* ═══════════════════════════════════════════════════ */
+  footer { 
+    background: var(--azul); 
+    color: rgba(255,255,255,0.6); 
+    text-align: center; 
+    padding: 24px 32px; 
+    font-family: var(--font-display); 
+    font-size: 0.8rem; 
+    letter-spacing: 0.06em; 
+    text-transform: uppercase; 
+  }
+  footer strong { color: var(--amarillo); }
+
+  /* ═══════════════════════════════════════════════════ */
+  /* COMPONENTES ADICIONALES (Materiales) */
+  /* ═══════════════════════════════════════════════════ */
+  .pqv-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; border: 1px solid var(--gris-borde); border-radius: 6px; overflow: hidden; }
+  .pqv-table th { background: var(--azul); color: #fff; text-align: left; padding: 14px 20px; font-family: var(--font-display); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.03em; }
+  .pqv-table td { padding: 14px 20px; font-size: 0.9rem; border-bottom: 1px solid #f1f5f9; color: var(--gris-texto); }
+  
+  .pqv-card { padding: 0; overflow: hidden; }
+  .pqv-card-header { padding: 20px 30px; border-bottom: 1px solid var(--gris-borde); display: flex; justify-content: space-between; align-items: center; }
+  .pqv-card-body { padding: 30px; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+  .stat-box { background: #fff; border: 1px solid var(--gris-borde); border-radius: 6px; padding: 15px; text-align: center; }
+  .stat-label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--gris-medio); text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat-num { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--azul); }
+
+  .btn-yellow { background: var(--amarillo); color: var(--azul); font-weight: 800; padding: 10px 20px; border-radius: 20px; font-family: var(--font-display); border: none; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .btn-pqv-blue { background: var(--azul); color: #fff; padding: 10px 20px; border-radius: 6px; font-family: var(--font-display); font-weight: 800; border: none; cursor: pointer; }
+  .btn-pqv-white { background: #fff; color: var(--azul); border: 1px solid var(--gris-borde); padding: 8px 16px; border-radius: 6px; font-family: var(--font-display); font-weight: 800; cursor: pointer; }
+
+  .pqv-divider { display: flex; align-items: center; gap: 15px; margin: 30px 0 20px; }
+  .pqv-divider::after { content: ''; flex: 1; height: 1.5px; background: #e2e8f0; }
+  .pqv-divider span { font-family: var(--font-display); font-weight: 800; font-size: 0.7rem; color: #64748b; text-transform: uppercase; }
+
+  .field-group { margin-bottom: 20px; }
+  .field-label { display: block; font-family: var(--font-display); font-size: 0.65rem; font-weight: 800; color: var(--gris-medio); text-transform: uppercase; margin-bottom: 6px; }
+  .field-input { width: 100%; padding: 10px 12px; border: 1px solid var(--gris-borde); border-radius: 6px; background: #fff; font-size: 0.9rem; }
+
+  .photo-preview { background: #f8fafc; border: 2px dashed var(--gris-borde); border-radius: 6px; padding: 15px; text-align: center; position: relative; min-height: 200px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .photo-preview img { max-width: 100%; border-radius: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+  .alarm-badge { padding: 6px 12px; border-radius: 4px; background: #f1f5f9; color: var(--azul); font-family: var(--font-display); font-weight: 800; font-size: 0.7rem; display: inline-flex; align-items: center; gap: 8px; margin-right: 10px; }
+
+  /* ── TOOLBAR (BíšSQUEDA Y FILTROS) ── */
+  .dash-toolbar { background: #fff; padding: 12px 24px; border: 1px solid var(--gris-borde); border-radius: 8px; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); }
+  .search-mock { flex: 1; max-width: 400px; border: 1px solid var(--gris-borde); border-radius: 6px; padding: 10px 14px; font-size: 0.9rem; color: var(--gris-texto); display: flex; align-items: center; gap: 10px; }
+  .search-mock input { border: none; outline: none; width: 100%; font-family: var(--font-body); font-size: 0.9rem; }
+  .search-mock input::placeholder { color: #94a3b8; }
+  .view-controls { display: flex; gap: 4px; background: #f1f5f9; padding: 4px; border-radius: 6px; }
+  .view-btn { padding: 6px 10px; border: none; background: none; border-radius: 4px; cursor: pointer; color: var(--gris-medio); font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+  .view-btn.active { background: #fff; color: var(--azul); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+</style>
+</head>
+<body>
+
+<div class="dev-banner">🧪 Mí“DULO ACTUALMENTE EN DESARROLLO — LAS FUNCIONES PUEDEN CAMBIAR SIN PREAVISO</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">PEQUIVEN</div>
+      <div>
+        <div class="logo-text">SILT · Sistema Integral de Logística</div>
+        <div class="logo-sub" style="font-size:0.75rem; opacity:0.6; font-family:var(--font-display); text-transform:uppercase;">Manual de Gestión de Materiales</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="hero materiales">
+  <div class="hero-inner">
+    <h1>Gestión de <span>Repuestos e Inventario</span></h1>
+    <p class="hero-desc">Control maestro de piezas, lubricantes y consumibles técnicos. Monitoreo de stock crítico con alertas automatizadas para la flota SILT.</p>
+  </div>
+</div>
+
+<div class="page-body">
+  <aside class="sidebar">
+    <div class="sidebar-title">🏠 Navegación</div>
+    <nav style="border-bottom: 1px solid var(--gris-borde); margin-bottom: 10px; padding-bottom: 10px;">
+      <a href="index.html" style="color: var(--rojo); font-weight: 800;">← Volver al Índice</a>
+    </nav>
+
+    <div class="sidebar-title">📋 Contenido</div>
+    <nav>
+      <a href="#dashboard" class="active">01 Dashboard Stock</a>
+      <a href="#nuevo-repuesto">02 Registrar Repuesto</a>
+      <a href="#alarmas">03 Alarmas y Alertas</a>
+      <a href="#vinculacion">04 Facturas y Enlaces</a>
+      <a href="#roles">05 Matriz de Roles</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+    
+    <!-- SECCIí“N 01: DASHBOARD -->
+    <section id="dashboard">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h2>Gestión de Repuestos</h2>
+      </div>
+      
+      <div class="pqv-card" style="padding: 24px; border-radius: 12px; margin-bottom: 20px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div style="display:flex; align-items:center; gap:20px;">
+             <div style="width:64px; height:64px; background:#f4f6fb; border:1px solid #e2e8f0; border-radius:14px; display:flex; align-items:center; justify-content:center; color:var(--azul); font-size:2rem;">📦</div>
+             <div>
+               <h3 style="font-family:var(--font-display); font-weight:900; color:var(--rojo); font-size:1.6rem; letter-spacing:0.02em;">CENTRAL DE INVENTARIO</h3>
+               <p style="color:var(--gris-medio); font-size:0.85rem; font-weight:600;">Control de inventario de repuestos y piezas para la flota</p>
+             </div>
+          </div>
+          <div style="display:flex; gap:12px;">
+            <button class="btn-pqv-white" style="display:flex; align-items:center; gap:8px; padding:10px 20px; font-size:0.75rem;">📋 ACTUALIZAR</button>
+            <button class="btn-yellow" style="padding:10px 24px; font-size:0.8rem; border-radius:20px;">+ NUEVO REPUESTO</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-box"><span class="stat-label">Total Repuestos</span><span class="stat-num">0</span></div>
+        <div class="stat-box"><span class="stat-label">Stock Bajo</span><span class="stat-num" style="color:var(--amarillo);">0</span></div>
+        <div class="stat-box"><span class="stat-label">Agotados</span><span class="stat-num" style="color:var(--rojo);">0</span></div>
+        <div class="stat-box"><span class="stat-label">Categorías</span><span class="stat-num">0</span></div>
+      </div>
+
+      <!-- Barra de Búsqueda y Filtros -->
+      <div class="dash-toolbar">
+        <div class="search-mock">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" placeholder="Buscar por nombre, código o categoría...">
+        </div>
+        <div style="display:flex; align-items:center; gap:15px;">
+          <div class="view-controls">
+            <button class="view-btn active"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></button>
+            <button class="view-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg></button>
+          </div>
+          <button class="btn-pqv-white" style="display:flex; align-items:center; gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
+            FILTROS
+          </button>
+        </div>
+      </div>
+
+      <div style="background:#fff; border:2px dashed #e2e8f0; padding:120px 20px; text-align:center; border-radius:15px; color:var(--gris-medio);">
+        <div style="font-size:4rem; opacity:0.1; margin-bottom:20px;">📦</div>
+        <p style="font-size:1.1rem; opacity:0.6;">No se encontraron repuestos</p>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 02: REGISTRO DE REPUESTO -->
+    <section id="nuevo-repuesto">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h2>Registrar Nuevo Repuesto</h2>
+      </div>
+      
+      <div class="pqv-card" style="border-top: 4px solid var(--azul); padding:40px;">
+        <div class="pqv-divider"><span>📦 INFORMACIí“N GENERAL</span></div>
+        <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:30px;">
+           <div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                <div class="field-group">
+                  <label class="field-label">Código de Repuesto *</label>
+                  <input type="text" class="field-input" value="REP-001">
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Nombre del Repuesto *</label>
+                  <input type="text" class="field-input" value="Filtro de Aceite (Industrial)">
+                </div>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Proveedor Habitual</label>
+                <div class="field-input" style="font-weight:700;">Repuestos Pequiven C.A.</div>
+              </div>
+           </div>
+           
+           <!-- Part Photo Feature -->
+           <div>
+              <label class="field-label">📸 Foto del Repuesto</label>
+              <div class="photo-preview">
+                 <img src="c_url_original.10wugc8ljq8a6ys.jpg" alt="Filtro de Aceite">
+              </div>
+           </div>
+        </div>
+
+        <div class="pqv-divider"><span>📊 INVENTARIO Y COSTOS</span></div>
+        <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:15px;">
+           <div class="field-group">
+             <label class="field-label">Precio Unitario (USD) *</label>
+             <input type="number" class="field-input" value="45.00">
+           </div>
+           <div class="field-group">
+             <label class="field-label">Stock Actual *</label>
+             <input type="number" class="field-input" value="12">
+           </div>
+           <div class="field-group">
+             <label class="field-label">Stock Mínimo *</label>
+             <input type="number" class="field-input" value="5">
+           </div>
+           <div class="field-group">
+             <label class="field-label">Unidad de Medida *</label>
+             <div class="field-input">Unidad</div>
+           </div>
+        </div>
+
+        <div class="pqv-divider"><span>🏢 ASIGNACIí“N Y DETALLES</span></div>
+        <div class="field-group">
+          <label class="field-label">Centro de Costos Asignado</label>
+          <div class="field-input">11.100 - Planta Fertilizantes Morón</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Descripción Detallada</label>
+          <textarea class="field-input" rows="3">Especificaciones técnicas de alta resistencia para unidades de transporte pesado.</textarea>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:15px; margin-top:20px;">
+           <button class="btn-pqv-white">CANCELAR</button>
+           <button class="btn-pqv-blue">REGISTRAR REPUESTO</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 03: ALARMAS Y ALERTAS -->
+    <section id="alarmas">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h2>Alarmas de Stock Crítico</h2>
+      </div>
+      <p style="margin-bottom:20px;">El sistema SILT monitorea permanentemente los niveles de inventario. Al alcanzar el stock mínimo, se disparan las siguientes alertas:</p>
+      
+      <div class="pqv-card" style="background:var(--amarillo-claro); border-color:var(--amarillo);">
+        <div class="pqv-card-body">
+           <div style="display:flex; gap:20px; align-items:flex-start;">
+              <div style="font-size:2rem;">🔔</div>
+              <div>
+                <h4 style="font-family:var(--font-display); font-weight:800; color:var(--azul-medio); margin-bottom:10px;">CONFIGURACIí“N DE NOTIFICACIONES</h4>
+                <div style="margin-top:15px;">
+                   <div class="alarm-badge">📧 E-MAIL: ACTIVO (compras@pequiven.com)</div>
+                   <div class="alarm-badge" style="background:#0088cc; color:#fff;">📱 TELEGRAM: CONECTADO (@PQV_Logistica_Bot)</div>
+                </div>
+                <p style="font-size:0.85rem; margin-top:15px; color:var(--gris-texto);">Las alertas de stock bajo se envían cada 24 horas hasta que el inventario sea reabastecido por encima del nivel mínimo.</p>
+              </div>
+           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 04: VINCULACIí“N Y DESCARGAS -->
+    <section id="vinculacion">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <h2>Documentación y Facturación</h2>
+      </div>
+      
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+         <div class="pqv-card">
+           <div class="pqv-card-header"><strong>📎 Vinculación Contable</strong></div>
+           <div class="pqv-card-body">
+              <p style="font-size:0.85rem; color:var(--gris-medio); margin-bottom:15px;">Este módulo permite asociar documentos de compra a cada lote.</p>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                 <button class="btn-pqv-white" style="font-size:0.7rem;">📁 VINCULAR FACTURA (PDF/IMG)</button>
+                 <button class="btn-pqv-white" style="font-size:0.7rem;">🏢 ASOCIAR NUEVO PROVEEDOR</button>
+              </div>
+           </div>
+         </div>
+         
+         <div class="pqv-card">
+           <div class="pqv-card-header"><strong>📥 Exportación de Datos</strong></div>
+           <div class="pqv-card-body">
+              <p style="font-size:0.85rem; color:var(--gris-medio); margin-bottom:15px;">Genere reportes detallados del stock actual por almacén.</p>
+              <button class="btn-pqv-blue" style="width:100%;">📊 DESCARGAR LISTA DE REPUESTOS (EXCEL)</button>
+              <p style="font-size:0.7rem; text-align:center; margin-top:10px; color:var(--gris-medio);">íšltima exportación: Hace 2 horas</p>
+           </div>
+         </div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 05: MATRIZ DE ROLES (ESTRUCTURA DE REFERENCIA) -->
+    <section id="roles">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <h2>Matriz de Roles</h2>
+      </div>
+      
+      <p style="margin-bottom:20px;">SILT-PEQUIVEN utiliza un sistema de Control de Acceso Basado en Roles (RBAC) para la gestión de inventarios:</p>
+
+      <table class="pqv-table">
+        <thead>
+          <tr>
+            <th>PERFIL</th>
+            <th>RESPONSABILIDADES PRINCIPALES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Super Administrador</strong></td>
+            <td>Control total del sistema, gestión de variables globales y auditoría técnica.</td>
+          </tr>
+          <tr>
+            <td><strong>Analista de Almacén</strong></td>
+            <td>Registro de nuevos repuestos, ajuste de stock y vinculación de facturas.</td>
+          </tr>
+          <tr>
+            <td><strong>Coordinador de Compras</strong></td>
+            <td>Aprobación de solicitudes de reabastecimiento y gestión de proveedores.</td>
+          </tr>
+          <tr>
+            <td><strong>Mecánico</strong></td>
+            <td>Consulta de disponibilidad y solicitud de materiales para OT.</td>
+          </tr>
+          <tr>
+            <td><strong>Auditor</strong></td>
+            <td>Solo lectura. Visualización de reportes históricos y trazabilidad de piezas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <strong>SILT · Sistema Integral de Logística</strong> — Módulo de Gestión de Inventario<br>
+  PETROQUÍMICA DE VENEZUELA, S.A.
+  <div style="font-size: 0.9rem; color: #ffffff; opacity: 1; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; max-width: 600px; margin: 0 auto; line-height: 1.5; font-family: var(--font-body); text-transform: none; margin-top: 20px;">
+    <strong>Diseño y Arquitectura Documental: Oscar J. Martinez Paz</strong><br>
+    ✉️ ozmartinezpaz@gmail.com &nbsp;&nbsp;|&nbsp;&nbsp; 📱 (+58) 0424-2050125
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario — Módulo de Vehículos | SILT-PEQUIVEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #003366;
+    --azul-medio: #004a99;
+    --azul-claro: #e8f0fb;
+    --rojo: #CF142B;
+    --rojo-claro: #fce4e7;
+    --amarillo: #FFD100;
+    --amarillo-claro: #fffbe6;
+    --gris-oscuro: #1a1a2e;
+    --gris-texto: #333333;
+    --gris-medio: #6b7280;
+    --gris-borde: #dde3ec;
+    --gris-fondo: #f4f6fb;
+    --blanco: #ffffff;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Source Serif 4', serif;
+    --font-code: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--gris-texto);
+    background: var(--gris-fondo);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--azul);
+    color: var(--blanco);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,51,102,0.18);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    gap: 20px;
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--rojo);
+    color: var(--blanco);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    padding: 8px 14px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+  }
+  .logo-text { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; opacity: 0.9; }
+  .logo-sub { font-size: 0.72rem; opacity: 0.6; letter-spacing: 0.06em; font-family: var(--font-display); text-transform: uppercase; }
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    opacity: 0.75;
+  }
+  .header-version {
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--azul) 0%, #001f44 60%, #0a1628 100%);
+    color: var(--blanco);
+    padding: 64px 32px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -60px;
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: rgba(207,20,43,0.08);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 10%;
+    width: 500px; height: 260px;
+    background: rgba(255,209,0,0.04);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-display);
+    font-size: 0.78rem; letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--amarillo);
+    margin-bottom: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 28px; height: 2px;
+    background: var(--amarillo);
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--amarillo); }
+  .hero-desc {
+    font-size: 1.05rem;
+    opacity: 0.78;
+    max-width: 560px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .tag-azul { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: #fff; }
+  .tag-rojo { background: var(--rojo); color: #fff; }
+  .tag-amarillo { background: var(--amarillo); color: var(--azul); }
+
+  /* ── LAYOUT ── */
+  .page-body { max-width: 1280px; margin: 0 auto; padding: 40px 32px; display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 72px;
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,51,102,0.07);
+  }
+  .sidebar-title {
+    background: var(--azul);
+    color: var(--blanco);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+  }
+  .sidebar nav { padding: 10px 0; }
+  .sidebar a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 18px;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--gris-texto);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .sidebar a:hover { color: var(--azul); background: var(--azul-claro); border-left-color: var(--azul); }
+  .sidebar a.active { color: var(--rojo); background: var(--rojo-claro); border-left-color: var(--rojo); }
+  .sidebar a .nav-num {
+    font-family: var(--font-code);
+    font-size: 0.7rem;
+    color: var(--gris-medio);
+    min-width: 18px;
+  }
+  .sidebar-divider { height: 1px; background: var(--gris-borde); margin: 6px 0; }
+
+  /* ── CONTENT ── */
+  .content > section {
+    margin-bottom: 56px;
+    padding: 24px;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+  }
+  .content > section:hover {
+    background: var(--blanco);
+    border-color: var(--azul-claro);
+    box-shadow: 0 12px 40px rgba(0,51,102,0.08);
+    transform: translateY(-4px);
+  }
+  .section-header {
+    display: flex; align-items: flex-end; gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--gris-borde);
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--gris-borde);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: -4px;
+  }
+  .section-tag {
+    font-family: var(--font-display);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--rojo);
+    font-weight: 700;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--azul);
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--azul);
+    margin: 28px 0 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  h3::before {
+    content: '';
+    width: 4px; height: 18px;
+    background: var(--rojo);
+    display: inline-block;
+    border-radius: 2px;
+  }
+  h4 {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gris-oscuro);
+    margin: 20px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 0.85rem;
+  }
+  p { margin-bottom: 14px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 6px rgba(0,51,102,0.05);
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+
+  /* ── ROLE CARDS ── */
+  .role-card {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--gris-borde);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .role-card-header {
+    padding: 14px 18px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .role-card-body { background: var(--blanco); padding: 14px 18px; }
+  .role-card.admin .role-card-header { background: var(--azul); color: var(--blanco); }
+  .role-card.coord .role-card-header { background: #0d6e3b; color: var(--blanco); }
+  .role-card.conductor .role-card-header { background: #7b3f00; color: var(--blanco); }
+  .role-card.supervisor .role-card-header { background: #5a2d8c; color: var(--blanco); }
+  .perm-item {
+    font-size: 0.88rem;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--gris-fondo);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .perm-item:last-child { border-bottom: none; }
+  .perm-yes { color: #0d6e3b; font-weight: 700; }
+  .perm-no { color: var(--rojo); font-weight: 700; }
+  .perm-warn { color: #b45309; font-weight: 700; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 16px 0; border-radius: 6px; border: 1px solid var(--gris-borde); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; background: var(--blanco); }
+  thead tr { background: var(--azul); color: var(--blanco); }
+  thead th {
+    padding: 11px 14px;
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  tbody tr { border-bottom: 1px solid var(--gris-borde); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--azul-claro); }
+  tbody td { padding: 10px 14px; vertical-align: top; }
+  .req { color: var(--rojo); font-weight: 700; font-family: var(--font-code); font-size: 0.8rem; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; margin: 16px 0; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex; gap: 14px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    min-width: 28px; height: 28px;
+    background: var(--azul);
+    color: var(--blanco);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .steps li strong { font-family: var(--font-display); font-weight: 700; }
+
+  /* ── ALERTS ── */
+  .alert {
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    display: flex; gap: 12px; align-items: flex-start;
+    font-size: 0.92rem;
+    border-left: 4px solid;
+  }
+  .alert-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .alert-info { background: var(--azul-claro); border-color: var(--azul); color: var(--azul); }
+  .alert-warning { background: var(--amarillo-claro); border-color: var(--amarillo); color: #78580a; }
+  .alert-danger { background: var(--rojo-claro); border-color: var(--rojo); color: #8b0a1a; }
+  .alert-success { background: #e8f5ee; border-color: #0d6e3b; color: #064d29; }
+
+  /* ── STATUS BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--font-display);
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .badge::before { content: '●'; font-size: 0.6rem; }
+  .badge-activo { background: #e8f5ee; color: #0d6e3b; }
+  .badge-mant { background: var(--amarillo-claro); color: #78580a; }
+  .badge-inop { background: var(--rojo-claro); color: var(--rojo); }
+  .badge-doc { background: #f0e8fb; color: #5a2d8c; }
+
+  /* ── CODE ── */
+  code {
+    font-family: var(--font-code);
+    font-size: 0.84em;
+    background: #eef1f7;
+    padding: 2px 6px;
+    border-radius: 3px;
+    color: var(--azul);
+  }
+  .path {
+    font-family: var(--font-code);
+    font-size: 0.84rem;
+    background: var(--azul);
+    color: var(--amarillo);
+    padding: 8px 14px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ── FAQ ── */
+  .faq-item {
+    border: 1px solid var(--gris-borde);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--blanco);
+  }
+  .faq-q {
+    width: 100%; background: none; border: none; cursor: pointer;
+    padding: 14px 18px;
+    font-family: var(--font-display);
+    font-weight: 700; font-size: 0.95rem;
+    color: var(--azul);
+    text-align: left;
+    display: flex; justify-content: space-between; align-items: center;
+    letter-spacing: 0.02em;
+    transition: background 0.15s;
+  }
+  .faq-q:hover { background: var(--azul-claro); }
+  .faq-q .arrow { transition: transform 0.2s; font-size: 0.8rem; }
+  .faq-item.open .faq-q { background: var(--azul-claro); }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-a { display: none; padding: 14px 18px; border-top: 1px solid var(--gris-borde); font-size: 0.92rem; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ── GLOSSARY ── */
+  .glossary-item { margin-bottom: 14px; }
+  .glossary-term {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--azul);
+    display: inline-block;
+    margin-bottom: 3px;
+    letter-spacing: 0.03em;
+  }
+  .glossary-def { font-size: 0.9rem; color: var(--gris-medio); padding-left: 14px; border-left: 2px solid var(--gris-borde); }
+
+  /* ── INSPECTION SIMULATOR (USER FIDELITY) ── */
+  .sim-wrap {
+    --sim-blue: #003366; --sim-red: #CF142B; --sim-yellow: #FFD100;
+    --sim-bg: #F8FAFC; --sim-g100: #F1F5F9; --sim-g200: #E2E8F0;
+    --sim-g400: #94A3B8; --sim-g500: #64748B; --sim-g700: #334155;
+    background: #fff; border: 1px solid var(--sim-g200); border-radius: 16px;
+    padding: 0; overflow: hidden; margin: 32px 0; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  }
+  .sim-header { background: #fff; border-bottom: 3px solid var(--sim-red); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
+  .sim-h-left { display: flex; align-items: center; gap: 14px; }
+  .sim-icon { width: 42px; height: 42px; background: #EEF2F7; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .sim-h-title { font-weight: 800; font-size: 16px; color: var(--sim-red); line-height: 1.1; font-family: var(--font-display); }
+  .sim-h-sub { font-size: 11px; color: var(--sim-g500); margin-top: 2px; font-family: var(--font-display); font-weight: 600; text-transform: uppercase; }
+  
+  .sim-tabs { padding: 16px 24px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+  .sim-tab {
+    padding: 8px 18px; border-radius: 8px; border: none; background: #fff; color: var(--sim-g700);
+    font-weight: 700; font-size: 12px; cursor: pointer; box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    border-bottom: 3px solid transparent; transition: all .18s; font-family: var(--font-display);
+  }
+  .sim-tab:hover { background: #EEF2F7; }
+  .sim-tab.active { background: var(--sim-blue); color: #fff; border-bottom-color: var(--sim-yellow); }
+
+  .sim-btn-clear { margin-left: auto; padding: 8px 15px; border-radius: 8px; border: 1.5px solid var(--sim-red); background: #FEF2F2; color: var(--sim-red); font-weight: 700; font-size: 11px; cursor: pointer; display: none; font-family: var(--font-display); }
+
+  .sim-main { padding: 16px 24px; display: grid; grid-template-columns: 1fr 300px; gap: 20px; }
+  
+  .sim-diag-panel { background: #fff; border-radius: 12px; border: 1px solid var(--sim-g200); padding: 16px; position: relative; }
+  .sim-info { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 8px; padding: 10px 12px; margin-bottom: 16px; font-size: 12px; color: #1E40AF; display: flex; gap: 8px; }
+  
+  .sim-svg-wrap { background: #F8FAFC; border-radius: 10px; border: 1px solid var(--sim-g200); padding: 20px; display: flex; justify-content: center; }
+  .sim-svg-wrap svg { width: 100%; height: auto; max-height: 320px; }
+  
+  .sim-legend { display: flex; gap: 20px; margin-top: 12px; justify-content: center; }
+  .sim-leg-item { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 800; color: var(--sim-g500); text-transform: uppercase; }
+  .sim-leg-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+  .sim-part-panel { background: #fff; border-radius: 12px; border: 1px solid var(--sim-g200); overflow: hidden; display: flex; flex-direction: column; }
+  .sim-list-hdr { background: var(--sim-blue); padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .sim-list-title { font-weight: 800; font-size: 11px; color: #fff; letter-spacing: .5px; font-family: var(--font-display); }
+  .sim-badge { background: rgba(255,255,255,.2); color: #fff; font-weight: 700; font-size: 10px; padding: 2px 10px; border-radius: 99px; }
+  .sim-badge.has { background: var(--sim-red); }
+
+  .sim-plist { max-height: 380px; overflow-y: auto; }
+  .sim-prow { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--sim-g100); cursor: pointer; border-left: 3px solid transparent; transition: all .12s; }
+  .sim-prow:hover { background: #EFF6FF; border-left-color: var(--sim-blue); }
+  .sim-prow.dmg { background: #FEF2F2; border-left-color: var(--sim-red); }
+  .sim-pnum { width: 28px; height: 28px; border-radius: 7px; background: var(--sim-g100); color: var(--sim-blue); font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sim-prow.dmg .sim-pnum { background: var(--sim-red); color: #fff; }
+  .sim-pname { font-size: 12px; color: var(--sim-g700); flex: 1; font-weight: 600; font-family: var(--font-display); text-transform: uppercase; }
+  .sim-prow.dmg .sim-pname { color: var(--sim-red); font-weight: 800; }
+
+  .sim-summary { padding: 12px 16px; border-top: 2px solid var(--sim-g100); background: #FEF2F2; display: none; }
+  .sim-summary.on { display: block; }
+  .sim-sum-title { font-size: 9px; font-weight: 800; color: var(--sim-g400); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+  .sim-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .sim-chip { background: #FECACA; color: var(--sim-red); font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(207,20,43,.1); }
+
+  /* Zonas SVG Simulator */
+  .z .area { fill: transparent; stroke: var(--sim-blue); stroke-width: 1.8; stroke-dasharray: 5 3; stroke-opacity: .5; transition: all .15s; }
+  .z:hover .area, .z.hov .area { fill: var(--sim-blue); fill-opacity: .18; stroke-dasharray: none; stroke-opacity: 1; }
+  .z.dmg .area { fill: var(--sim-red); fill-opacity: .35; stroke: var(--sim-red); stroke-dasharray: none; stroke-opacity: 1; stroke-width: 2.2; }
+  .z.is-selected .area { fill: var(--sim-blue); fill-opacity: .25; stroke-dasharray: none; stroke-opacity: 1; stroke-width: 2.5; }
+  .z .badge-bg { fill: #fff; stroke: var(--sim-blue); stroke-width: 1.5; transition: all .15s; }
+  .z:hover .badge-bg, .z.hov .badge-bg { fill: var(--sim-blue); }
+  .z.dmg .badge-bg { fill: var(--sim-red); stroke: var(--sim-red); }
+  .z.is-selected .badge-bg { fill: var(--sim-blue); stroke: var(--sim-blue); }
+  .z .bnum { fill: var(--sim-blue); font-size: 10px; font-weight: 900; pointer-events: none; transition: fill .15s; font-family: sans-serif; }
+  .z:hover .bnum, .z.hov .bnum, .z.dmg .bnum, .z.is-selected .bnum { fill: #fff; }
+
+  /* ── SUPPORT ── */
+  .support-card {
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+  }
+  .support-icon { font-size: 2rem; margin-bottom: 8px; }
+  .support-label { font-family: var(--font-display); font-weight: 700; font-size: 0.9rem; color: var(--azul); margin-bottom: 6px; }
+  .support-contact { font-family: var(--font-code); font-size: 0.82rem; color: var(--rojo); word-break: break-all; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--azul);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 24px 32px;
+    font-family: var(--font-display);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  footer strong { color: var(--amarillo); }
+
+  /* ── PRINT ── */
+  @media print {
+    .sidebar, .site-header { display: none; }
+    .page-body { grid-template-columns: 1fr; }
+    .hero { print-color-adjust: exact; }
+  }
+
+  @media (max-width: 900px) {
+    .page-body { grid-template-columns: 1fr; }
+    .sidebar { position: static; }
+    .card-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .header-inner { padding: 12px 16px; }
+    .hero { padding: 40px 16px 36px; }
+    .page-body { padding: 24px 16px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">PEQUIVEN</div>
+      <div>
+        <div class="logo-text">SILT · Sistema Integral de Logística</div>
+        <div class="logo-sub">Manual de Usuario — Módulo de Vehículos</div>
+      </div>
+    </div>
+    <div class="header-meta">
+      <span class="header-version">v1.0</span>
+      <span>Marzo 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Documentación Oficial</div>
+    <h1>Módulo de<br><span>Gestión de Flota</span><br>Vehicular</h1>
+    <p class="hero-desc">Guía completa para el registro, seguimiento, mantenimiento y administración de la flota de transporte de PEQUIVEN dentro del sistema SILT.</p>
+    <div class="hero-tags">
+      <span class="tag tag-rojo">Administrador</span>
+      <span class="tag tag-azul">Coordinador de Flota</span>
+      <span class="tag tag-azul">Conductor</span>
+      <span class="tag tag-azul">Supervisor</span>
+      <span class="tag tag-amarillo">SILT-PEQUIVEN</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-title">🏠 Navegación Principal</div>
+    <nav style="border-bottom: 1px solid var(--gris-borde); margin-bottom: 10px; padding-bottom: 10px;">
+      <a href="index.html" style="color: var(--rojo); font-weight: 800;">Ver Índice General</a>
+    </nav>
+
+    <div class="sidebar-title">📋 Contenido Vehículos</div>
+    <nav>
+      <a href="#introduccion" class="active"><span class="nav-num">01</span> Introducción</a>
+      <a href="#roles"><span class="nav-num">02</span> Roles y Permisos</a>
+      <a href="#registro"><span class="nav-num">03</span> Registro de Vehículos</a>
+      <a href="#estados"><span class="nav-num">04</span> Estados del Vehículo</a>
+      <a href="#conductores"><span class="nav-num">05</span> Asignación de Conductores</a>
+      <a href="#solicitudes"><span class="nav-num">06</span> Solicitudes de Servicio</a>
+      <div class="sidebar-divider"></div>
+      <a href="#busqueda"><span class="nav-num">07</span> Búsqueda y Filtros</a>
+      <a href="#inspeccion"><span class="nav-num">08</span> Inspección Técnica</a>
+      <a href="#historial"><span class="nav-num">09</span> Historial Operativo</a>
+      <a href="#bajas"><span class="nav-num">10</span> Bajas del Sistema</a>
+      <a href="#faq"><span class="nav-num">11</span> Preguntas Frecuentes</a>
+      <a href="#soporte"><span class="nav-num">12</span> Soporte Técnico</a>
+      <div class="sidebar-divider"></div>
+      <a href="#glosario"><span class="nav-num">A</span> Glosario</a>
+      <a href="#validaciones"><span class="nav-num">B</span> Validaciones</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- SECCIí“N 1 -->
+    <section id="introduccion">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <div class="section-title-block">
+          <div class="section-tag">Introducción</div>
+          <h2>Propósito del Módulo</h2>
+        </div>
+      </div>
+      <div class="card">
+        <p>El módulo de <strong>Vehículos</strong> de SILT-PEQUIVEN permite gestionar de forma centralizada el registro, seguimiento y mantenimiento de toda la flota de transporte de la empresa. Este módulo cubre desde el alta de un nuevo vehículo hasta su desactivación, pasando por la gestión de estados, asignación de conductores y solicitudes de servicio.</p>
+        <p>Este manual está dirigido a todos los usuarios del sistema y detalla los procedimientos según el rol asignado. Si no puedes ver una funcionalidad descrita aquí, es posible que tu rol no tenga ese permiso — consulta la sección de Roles y Permisos.</p>
+      </div>
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div><strong>Versión del documento:</strong> 1.0 — Marzo 2026. Este manual es un documento vivo; las actualizaciones se publican en el portal interno de SILT-PEQUIVEN.</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 2 -->
+    <section id="roles">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <div class="section-title-block">
+          <div class="section-tag">Acceso</div>
+          <h2>Roles y Permisos</h2>
+        </div>
+      </div>
+      <p>El sistema aplica permisos automáticamente según el rol de tu usuario. Hay cuatro roles en el módulo de Vehículos:</p>
+      <div class="card-grid">
+        <div class="role-card admin">
+          <div class="role-card-header">👑 Administrador</div>
+          <div class="role-card-body">
+            <div class="perm-item"><span class="perm-yes">✔</span> Crear vehículos</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Editar vehículos</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Eliminar / restaurar</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Cambiar estados</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Asignar conductores</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Ver auditoría completa</div>
+          </div>
+        </div>
+        <div class="role-card coord">
+          <div class="role-card-header">🗂️ Coordinador de Flota</div>
+          <div class="role-card-body">
+            <div class="perm-item"><span class="perm-yes">✔</span> Crear vehículos</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Editar vehículos</div>
+            <div class="perm-item"><span class="perm-warn">⚠</span> Solo desactivar (no borrar)</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Cambiar estados</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Asignar conductores</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Aprobar solicitudes</div>
+          </div>
+        </div>
+        <div class="role-card conductor">
+          <div class="role-card-header">🚗 Conductor</div>
+          <div class="role-card-body">
+            <div class="perm-item"><span class="perm-no">✘</span> No puede crear</div>
+            <div class="perm-item"><span class="perm-no">✘</span> No puede editar</div>
+            <div class="perm-item"><span class="perm-no">✘</span> No puede eliminar</div>
+            <div class="perm-item"><span class="perm-warn">👁</span> Solo lectura (su vehículo)</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Solicitar mantenimiento</div>
+          </div>
+        </div>
+        <div class="role-card supervisor">
+          <div class="role-card-header">📊 Supervisor</div>
+          <div class="role-card-body">
+            <div class="perm-item"><span class="perm-no">✘</span> No puede crear</div>
+            <div class="perm-item"><span class="perm-no">✘</span> No puede editar</div>
+            <div class="perm-item"><span class="perm-warn">👁</span> Lectura de su área</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Aprobar/rechazar servicios</div>
+            <div class="perm-item"><span class="perm-yes">✔</span> Generar reportes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 3 -->
+    <section id="registro">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <div class="section-title-block">
+          <div class="section-tag">CRUD</div>
+          <h2>Registro de Vehículos</h2>
+        </div>
+      </div>
+
+      <h3>Crear un Nuevo Vehículo</h3>
+      <div class="path">🗂 Vehículos → Nuevo Vehículo</div>
+
+      <h4>Campos Obligatorios <span class="req">*</span></h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Descripción</th><th>Ejemplo</th><th>Validación</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Placa</strong> <span class="req">*</span></td><td>Identificador único del vehículo</td><td><code>ABC-123</code></td><td>íšnico en el sistema</td></tr>
+            <tr><td><strong>VIN</strong> <span class="req">*</span></td><td>Número de identificación vehicular</td><td><code>1HGCM82633A123456</code></td><td>Exactamente 17 caracteres, único</td></tr>
+            <tr><td><strong>Chasis</strong> <span class="req">*</span></td><td>Número de chasis</td><td><code>CH123456789</code></td><td>íšnico si se proporciona</td></tr>
+            <tr><td><strong>Marca</strong> <span class="req">*</span></td><td>Fabricante del vehículo</td><td>Toyota, Ford</td><td>Selección de lista</td></tr>
+            <tr><td><strong>Modelo</strong> <span class="req">*</span></td><td>Modelo específico</td><td>Hilux, F-150</td><td>Texto libre</td></tr>
+            <tr><td><strong>Año</strong> <span class="req">*</span></td><td>Año de fabricación</td><td>2023</td><td>Entre 1990 y año actual+1</td></tr>
+            <tr><td><strong>Tipo</strong> <span class="req">*</span></td><td>Categoría operativa</td><td>Camión, Moto</td><td>Selección de lista</td></tr>
+            <tr><td><strong>Estado</strong> <span class="req">*</span></td><td>Condición al registrar</td><td>ACTIVO</td><td>ACTIVO / EN_MANTENIMIENTO / INOPERATIVO</td></tr>
+            <tr><td><strong>Centro de Costo</strong> <span class="req">*</span></td><td>Unidad administrativa</td><td>Logística - Occidente</td><td>Selección de lista</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Campos Opcionales</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Descripción</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td>Color</td><td>Color principal del vehículo</td><td>Blanco, Rojo</td></tr>
+            <tr><td>Capacidad de Carga</td><td>Peso máximo en toneladas</td><td>5.5</td></tr>
+            <tr><td>Capacidad de Tanque</td><td>Litros de combustible</td><td>80</td></tr>
+            <tr><td>Kilometraje Inicial</td><td>Odómetro al registrar</td><td>15000</td></tr>
+            <tr><td>Fecha de Adquisición</td><td>Incorporación a la flota</td><td>15/03/2024</td></tr>
+            <tr><td>Conductor Asignado</td><td>Responsable actual</td><td>Juan Pérez — V-12.345.678</td></tr>
+            <tr><td>Documentos Adjuntos</td><td>Seguros, SOAT, permisos</td><td>PDF/JPG — máx. 10 MB</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Pasos para Registrar</h3>
+      <div class="card">
+        <ol class="steps">
+          <li>Haz clic en <strong>"Nuevo Vehículo"</strong> en el menú lateral.</li>
+          <li>Completa todos los campos obligatorios marcados con <span class="req">*</span>.</li>
+          <li>Adjunta documentos si es necesario (PDF o JPG, máx. 10 MB cada uno).</li>
+          <li>Haz clic en <strong>"Guardar"</strong> para confirmar el registro.</li>
+          <li>El sistema mostrará el mensaje: <em>"Vehículo registrado exitosamente"</em>.</li>
+        </ol>
+      </div>
+
+      <h3>Errores Comunes y Soluciones</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Mensaje de Error</th><th>Causa Probable</th><th>Solución</th></tr></thead>
+          <tbody>
+            <tr><td><code>La placa ya está registrada</code></td><td>Duplicado en la base de datos</td><td>Verifica si el vehículo ya existe</td></tr>
+            <tr><td><code>El VIN debe tener 17 caracteres</code></td><td>Formato incorrecto</td><td>Revisa el VIN físico del vehículo</td></tr>
+            <tr><td><code>El año no puede ser mayor a 2027</code></td><td>Valor inválido</td><td>Ingresa un año entre 1990 y 2027</td></tr>
+            <tr><td><code>Debe seleccionar un centro de costo</code></td><td>Campo obligatorio vacío</td><td>Selecciona una opción de la lista</td></tr>
+            <tr><td><code>Error de conexión con el servidor</code></td><td>Problema de red</td><td>Espera 1–2 minutos e intenta de nuevo o contacta a TI</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 4 -->
+    <section id="estados">
+      <div class="section-header">
+        <div class="section-num">04</div>
+        <div class="section-title-block">
+          <div class="section-tag">Operaciones</div>
+          <h2>Estados del Vehículo</h2>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <div class="card" style="border-top: 3px solid #0d6e3b;">
+          <span class="badge badge-activo">ACTIVO</span>
+          <p style="margin-top:10px; font-size:0.9rem;">Vehículo operativo y disponible para asignación. Estado inicial recomendado al registrar.</p>
+          <div style="font-size:0.8rem; color: var(--gris-medio); font-family: var(--font-display);">Puede cambiar: Admin, Coordinador</div>
+        </div>
+        <div class="card" style="border-top: 3px solid #b45309;">
+          <span class="badge badge-mant">EN_MANTENIMIENTO</span>
+          <p style="margin-top:10px; font-size:0.9rem;">En taller o reparación. Los conductores pueden solicitarlo mediante una solicitud de servicio.</p>
+          <div style="font-size:0.8rem; color: var(--gris-medio); font-family: var(--font-display);">Puede cambiar: Admin, Coordinador</div>
+        </div>
+        <div class="card" style="border-top: 3px solid var(--rojo);">
+          <span class="badge badge-inop">INOPERATIVO</span>
+          <p style="margin-top:10px; font-size:0.9rem;">Fuera de servicio por falla grave. El vehículo no puede ser asignado a conductores.</p>
+          <div style="font-size:0.8rem; color: var(--gris-medio); font-family: var(--font-display);">Puede cambiar: Admin, Coordinador</div>
+        </div>
+        <div class="card" style="border-top: 3px solid #5a2d8c;">
+          <span class="badge badge-doc">DOCUMENTO_VENCIDO</span>
+          <p style="margin-top:10px; font-size:0.9rem;">Alerta automática del sistema cuando el seguro o SOAT vence. Requiere renovación.</p>
+          <div style="font-size:0.8rem; color: var(--gris-medio); font-family: var(--font-display);">Asignado por: Sistema automático</div>
+        </div>
+      </div>
+
+      <h3>Cambiar el Estado de un Vehículo</h3>
+      <div class="path">🗂 Vehículos → Lista → [Seleccionar] → Editar Estado</div>
+      <div class="card">
+        <ol class="steps">
+          <li>Busca el vehículo en la lista usando la barra de búsqueda.</li>
+          <li>Haz clic en el ícono de edición <strong>✏️</strong> junto al vehículo.</li>
+          <li>Modifica el campo <strong>"Estado"</strong> al valor deseado.</li>
+          <li>Agrega una nota opcional para dejar registro del motivo del cambio.</li>
+          <li>Haz clic en <strong>"Actualizar"</strong> para guardar el cambio.</li>
+        </ol>
+      </div>
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div>Los conductores <strong>no pueden cambiar el estado directamente</strong>. Para solicitar un cambio a mantenimiento, deben usar la función <em>"Solicitar Servicio"</em> (ver Sección 6).</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 5 -->
+    <section id="conductores">
+      <div class="section-header">
+        <div class="section-num">05</div>
+        <div class="section-title-block">
+          <div class="section-tag">Asignaciones</div>
+          <h2>Asignación de Conductores</h2>
+        </div>
+      </div>
+
+      <h3>Vincular un Conductor a un Vehículo</h3>
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div><strong>Requisitos previos:</strong> El conductor debe estar registrado en el sistema. El vehículo debe estar en estado <span class="badge badge-activo">ACTIVO</span>. El conductor no debe tener otro vehículo actualmente asignado.</div>
+      </div>
+      <div class="card">
+        <ol class="steps">
+          <li>Edita el vehículo haciendo clic en <strong>✏️</strong>.</li>
+          <li>Ubica el campo <strong>"Conductor Asignado"</strong> y busca por nombre, cédula o licencia.</li>
+          <li>Selecciona el conductor correcto de la lista desplegable.</li>
+          <li>Haz clic en <strong>"Actualizar"</strong> para confirmar.</li>
+          <li>El sistema confirmará: <em>"Conductor asignado exitosamente"</em>.</li>
+        </ol>
+      </div>
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div>Si el conductor <strong>ya tiene un vehículo asignado</strong>, el sistema <em>desvinculará automáticamente</em> el vehículo anterior antes de asignar el nuevo. Esto previene asignaciones duplicadas.</div>
+      </div>
+
+      <h3>Desvincular un Conductor</h3>
+      <div class="card">
+        <ol class="steps">
+          <li>Edita el vehículo (✏️).</li>
+          <li>Haz clic en <strong>✖️</strong> junto al nombre del conductor asignado.</li>
+          <li>Confirma la acción en el diálogo de verificación.</li>
+          <li>El vehículo quedará sin conductor asignado.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 6 -->
+    <section id="solicitudes">
+      <div class="section-header">
+        <div class="section-num">06</div>
+        <div class="section-title-block">
+          <div class="section-tag">Mantenimiento</div>
+          <h2>Solicitudes de Servicio</h2>
+        </div>
+      </div>
+      <p>Los conductores pueden solicitar mantenimiento o reparación para su vehículo asignado. El flujo pasa por revisión del Coordinador o Supervisor antes de activarse.</p>
+
+      <h3>Crear una Solicitud (Conductor)</h3>
+      <div class="path">🗂 Mis Vehículos → [Seleccionar vehículo] → Solicitar Servicio</div>
+      <div class="card">
+        <ol class="steps">
+          <li>Ve a la sección <strong>"Mis Vehículos"</strong> en el menú.</li>
+          <li>Selecciona el vehículo para el que necesitas mantenimiento.</li>
+          <li>Haz clic en <strong>"Solicitar Servicio"</strong>.</li>
+          <li>Completa el formulario:<br>
+            — <strong>Tipo de Servicio:</strong> Mantenimiento Preventivo o Reparación Correctiva<br>
+            — <strong>Descripción:</strong> Detalla el problema o el servicio requerido<br>
+            — <strong>Prioridad:</strong> Baja / Media / Alta / Crítica
+          </li>
+          <li>Envía la solicitud. El Coordinador recibirá una notificación para revisión.</li>
+        </ol>
+      </div>
+
+      <h3>Aprobar o Rechazar Solicitudes (Coordinador / Supervisor)</h3>
+      <div class="card">
+        <ol class="steps">
+          <li>Ve a <strong>"Solicitudes de Servicio"</strong> en el módulo de vehículos.</li>
+          <li>Revisa las solicitudes pendientes en la bandeja de entrada.</li>
+          <li>Selecciona la solicitud a gestionar.</li>
+          <li>Haz clic en <strong>"Aprobar"</strong> o <strong>"Rechazar"</strong> según corresponda.</li>
+          <li>Al aprobar, el vehículo cambia automáticamente a estado <span class="badge badge-mant">EN_MANTENIMIENTO</span>.</li>
+        </ol>
+      </div>
+      <div class="alert alert-success">
+        <span class="alert-icon">✅</span>
+        <div>Al aprobar una solicitud, el sistema notifica automáticamente al conductor y registra el cambio en el historial de auditoría.</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 7 -->
+    <section id="busqueda">
+      <div class="section-header">
+        <div class="section-num">07</div>
+        <div class="section-title-block">
+          <div class="section-tag">Consultas</div>
+          <h2>Búsqueda y Filtros</h2>
+        </div>
+      </div>
+
+      <h3>Buscar Vehículos</h3>
+      <p>Usa la barra de búsqueda superior para localizar vehículos por: <strong>Placa, VIN, Marca/Modelo, Conductor asignado</strong> o <strong>Centro de Costo</strong>.</p>
+
+      <h3>Filtros Avanzados</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Filtro</th><th>Opciones disponibles</th><th>Uso típico</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Estado</strong></td><td>Activo, Mantenimiento, Inoperativo, Doc. Vencido</td><td>Ver solo vehículos operativos</td></tr>
+            <tr><td><strong>Tipo de Vehículo</strong></td><td>Camión, Moto, Automóvil, etc.</td><td>Filtrar por categoría de transporte</td></tr>
+            <tr><td><strong>Centro de Costo</strong></td><td>Lista de sedes/áreas</td><td>Ver la flota de una ubicación específica</td></tr>
+            <tr><td><strong>Conductor</strong></td><td>Búsqueda por nombre o cédula</td><td>Ver vehículos de un conductor</td></tr>
+            <tr><td><strong>Fecha de Registro</strong></td><td>Rango de fechas</td><td>Reportes históricos de incorporación</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Exportar Resultados</h3>
+      <div class="card">
+        <p>Haz clic en <strong>"Exportar"</strong> para descargar la lista filtrada en el formato que necesites:</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:10px;">
+          <span class="badge" style="background:#fce4e7; color: var(--rojo); padding:8px 16px; font-size:0.85rem;">📄 PDF — Para imprimir</span>
+          <span class="badge" style="background:#e8f5ee; color:#0d6e3b; padding:8px 16px; font-size:0.85rem;">📊 Excel — Para análisis</span>
+          <span class="badge" style="background:var(--azul-claro); color:var(--azul); padding:8px 16px; font-size:0.85rem;">📋 CSV — Para integración</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 8 -->
+    <section id="inspeccion">
+      <div class="section-header">
+        <div class="section-num">08</div>
+        <div class="section-title-block">
+          <div class="section-tag">Técnico</div>
+          <h2>Inspección de Vehículo</h2>
+        </div>
+      </div>
+      <p>La inspección técnica permite registrar el estado físico y funcional de la unidad de forma periódica o al recibir/entregar el vehículo.</p>
+
+      <!-- SIMULADOR DE INSPECCIí“N PROFESIONAL (USER FIDELITY) -->
+      <div id="interactive-inspection" class="sim-wrap">
+        <div class="sim-header">
+          <div class="sim-h-left">
+            <div class="sim-icon">
+              <svg width="28" height="20" viewBox="0 0 30 22" fill="none">
+                <path d="M2 16 Q2 12 5 10 L8 4 L22 4 L25 10 Q28 12 28 16 L28 18 L2 18 Z" fill="#003366"/>
+                <rect x="1" y="16" width="28" height="4" rx="2" fill="#003366" opacity=".6"/>
+                <ellipse cx="7" cy="19" rx="3.5" ry="3" fill="#FFD100" stroke="#003366" stroke-width="1"/>
+                <ellipse cx="23" cy="19" rx="3.5" ry="3" fill="#FFD100" stroke="#003366" stroke-width="1"/>
+                <path d="M8 9 L10 5 L20 5 L22 9 Z" fill="#DBEAFE" opacity=".7"/>
+              </svg>
+            </div>
+            <div>
+              <div class="sim-h-title">ESTADO DE CARROCERÍA</div>
+              <div class="sim-h-sub" id="hSimSub">Inspección visual técnica — SEDÁN</div>
+            </div>
+          </div>
+          <div class="sim-h-date" id="hSimDate" style="font-size:11px; color:var(--sim-g400); font-weight:700;"></div>
+        </div>
+
+        <div class="sim-tabs">
+          <button class="sim-tab active" id="tab-sedan" onclick="switchSimV('sedan',this)">🚗 Sedán</button>
+          <button class="sim-tab" id="tab-pickup" onclick="switchSimV('pickup',this)">🛻 Pick-up</button>
+          <button class="sim-tab" id="tab-van" onclick="switchSimV('van',this)">🚧 Van de Transporte</button>
+          <button class="sim-btn-clear" id="btnSimClear" onclick="clearSimAll()">✕ Limpiar daños</button>
+        </div>
+
+        <div class="sim-main">
+          <div class="sim-diag-panel">
+            <div class="sim-info">
+              <span style="font-size:14px; margin-top:-2px;">ℹ️</span>
+              Haga clic sobre las zonas numeradas para marcar partes con daños, rayones o abolladuras.
+            </div>
+            <div class="sim-svg-wrap" id="simSvgWrap"></div>
+            <div class="sim-legend">
+              <div class="sim-leg-item"><div class="sim-leg-dot" style="background:#003366"></div> Parte OK</div>
+              <div class="sim-leg-item"><div class="sim-leg-dot" style="background:#CF142B"></div> Parte con daño / choque</div>
+            </div>
+          </div>
+          
+          <div class="sim-part-panel">
+            <div class="sim-list-hdr">
+              <span class="sim-list-title">PARTES DEL VEHÍCULO</span>
+              <span class="sim-badge" id="simBadge">Sin daños</span>
+            </div>
+            <div class="sim-plist" id="simPList"></div>
+            <div class="sim-summary" id="simSummary">
+              <div class="sim-sum-title" id="simSumTitle"></div>
+              <div class="sim-chips" id="simSumChips"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Estado de Carrocería (Inspección Visual)</h3>
+      <div class="card">
+        <p>El sistema utiliza un diagrama interactivo según el tipo de unidad. Para las <strong>Camionetas Pick-up</strong>, se evalúan 10 zonas críticas:</p>
+        <div class="card-grid">
+          <div style="font-size:0.85rem;">
+            <ul class="steps">
+              <li>1. Capó</li>
+              <li>2. Guardafango Del. Izq.</li>
+              <li>3. Guardafango Del. Der.</li>
+              <li>4. Puerta Del. Izq.</li>
+              <li>5. Puerta Tras. Izq.</li>
+            </ul>
+          </div>
+          <div style="font-size:0.85rem;">
+            <ul class="steps">
+              <li>6. Techo de Cabina</li>
+              <li>7. Puerta Tras. Der.</li>
+              <li>8. Puerta Del. Der.</li>
+              <li>9. Tolva (Caja de carga)</li>
+              <li>10. Compuerta de Tolva</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3>Lista de Chequeo Técnica</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Categoría</th><th>Ítems Evaluados</th><th>Estado Esperado</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Neumáticos</strong></td>
+              <td>Delanteros, Traseros y Repuesto</td>
+              <td>Vida útil > 70%</td>
+            </tr>
+            <tr>
+              <td><strong>Iluminación</strong></td>
+              <td>Altas, Bajas, Intermitentes, Retroceso</td>
+              <td>Operatividad 100%</td>
+            </tr>
+            <tr>
+              <td><strong>Seguridad</strong></td>
+              <td>Extintor (PQS), Gato, Triángulo, Llave de Cruz</td>
+              <td>Vigente y Completo</td>
+            </tr>
+            <tr>
+              <td><strong>Adicionales</strong></td>
+              <td>Botiquín, Limpiaparabrisas, Espejos, Cinturones</td>
+              <td>Funcional</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-info">
+        <span class="alert-icon">📱</span>
+        <div><strong>Compartir:</strong> Los resultados de la inspección pueden compartirse vía WhatsApp directamente desde la ficha del vehículo para reportes inmediatos a supervisión.</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 9 -->
+    <section id="historial">
+      <div class="section-header">
+        <div class="section-num">09</div>
+        <div class="section-title-block">
+          <div class="section-tag">Trazabilidad</div>
+          <h2>Historial y Documentación</h2>
+        </div>
+      </div>
+      <p>La integridad del historial operativo es garante de la seguridad y el valor de los activos de PEQUIVEN.</p>
+      <div class="card-grid">
+        <div class="card">
+          <h4>Mantenimiento</h4>
+          <p style="font-size:0.88rem;">Registro cronológico de servicios preventivos y correctivos, incluyendo números de OT y costos asociados.</p>
+        </div>
+        <div class="card">
+          <h4>Traslados</h4>
+          <p style="font-size:0.88rem;">Bitácora de rutas, destinos y conductores responsables de cada movimiento de la unidad.</p>
+        </div>
+        <div class="card">
+          <h4>Documentación</h4>
+          <p style="font-size:0.88rem;">Repositorio digitalizado de Títulos, Pólizas de Seguro y SOAT con alertas de vencimiento.</p>
+        </div>
+      </div>
+      <div class="alert alert-warning">
+        <span class="alert-icon">⚠️</span>
+        <div><strong>Importancia del Historial:</strong> Un historial inconsistente (ej: saltos de kilometraje o falta de soportes) puede invalidar garantías o coberturas de seguros corporativos.</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 10 -->
+    <section id="bajas">
+      <div class="section-header">
+        <div class="section-num">10</div>
+        <div class="section-title-block">
+          <div class="section-tag">Administración</div>
+          <h2>Bajas del Sistema</h2>
+        </div>
+      </div>
+
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div><strong>¿Qué es el Soft Delete?</strong> En lugar de eliminar permanentemente un vehículo, el sistema lo <em>marca como eliminado</em> conservando todo el historial. Esto permite restaurar el registro si fue un error y cumple con normativas de trazabilidad.</div>
+      </div>
+
+      <h3>Desactivar un Vehículo</h3>
+      <div class="card">
+        <ol class="steps">
+          <li>Localiza el vehículo en la lista.</li>
+          <li>Haz clic en el ícono de eliminar <strong>🗑️</strong>.</li>
+          <li>Confirma la acción en el diálogo de verificación.</li>
+          <li>El vehículo desaparecerá de las listas normales pero se conserva en la base de datos.</li>
+        </ol>
+      </div>
+      <div class="alert alert-danger">
+        <span class="alert-icon">🚫</span>
+        <div><strong>No puedes desactivar un vehículo que tenga:</strong> traslados activos o programados, solicitudes de servicio pendientes, o facturas asociadas sin cerrar.</div>
+      </div>
+
+      <h3>Ver y Restaurar Vehículos Eliminados (Solo Admin)</h3>
+      <div class="card">
+        <ol class="steps">
+          <li>En la lista de vehículos, activa el filtro <strong>"Incluir eliminados"</strong>.</li>
+          <li>Los vehículos desactivados aparecerán resaltados en gris.</li>
+          <li>Para restaurar: Edita el vehículo y desmarca la opción <strong>"Eliminado"</strong>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 11 -->
+    <section id="faq">
+      <div class="section-header">
+        <div class="section-num">11</div>
+        <div class="section-title-block">
+          <div class="section-tag">Ayuda</div>
+          <h2>Preguntas Frecuentes</h2>
+        </div>
+      </div>
+
+      <div class="faq-item open">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo registrar un vehículo sin VIN? <span class="arrow">▼</span></button>
+        <div class="faq-a">No. El VIN es un campo obligatorio y debe ser único en el sistema. Si el vehículo no tiene VIN (casos muy antiguos o irregulares), contacta al Administrador para evaluar un identificador alternativo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué pasa si ingreso una placa equivocada? <span class="arrow">▼</span></button>
+        <div class="faq-a">Puedes editar el vehículo para corregir la placa, siempre que la nueva placa no esté ya registrada en el sistema. Si existe un duplicado, contacta al Administrador para resolver el conflicto.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Puedo asignar dos conductores al mismo vehículo? <span class="arrow">▼</span></button>
+        <div class="faq-a">No. Un vehículo solo puede tener un conductor asignado como "actual". Para registrar conductores históricos, usa el campo de notas o consulta el historial de auditoría del vehículo.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Cómo veo quién modificó un vehículo y cuándo? <span class="arrow">▼</span></button>
+        <div class="faq-a">Haz clic en el ícono de <strong>Historial 🕒</strong> junto al vehículo. Verás la fecha y hora del cambio, el usuario que lo realizó, y los campos modificados con los valores antes y después del cambio.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Qué hago si aparece "Error de validación" sin detalles? <span class="arrow">▼</span></button>
+        <div class="faq-a">1. Revisa que todos los campos obligatorios estén completos. 2. Verifica que los formatos sean correctos (VIN de 17 caracteres, año válido). 3. Intenta guardar nuevamente. 4. Si persiste, captura la pantalla y contacta a soporte técnico con los datos de la sección 10.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">¿Por qué no veo algunos botones o funciones? <span class="arrow">▼</span></button>
+        <div class="faq-a">Las funciones se muestran según el rol de tu usuario. Si crees que te falta acceso necesario para tu trabajo, contacta al Administrador del sistema para revisar tus permisos.</div>
+      </div>
+    </section>
+
+    <!-- SECCIí“N 12 -->
+    <section id="soporte">
+      <div class="section-header">
+        <div class="section-num">12</div>
+        <div class="section-title-block">
+          <div class="section-tag">Ayuda</div>
+          <h2>Soporte Técnico</h2>
+        </div>
+      </div>
+
+      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+        <div class="support-card">
+          <div class="support-icon">🖥️</div>
+          <div class="support-label">Errores del Sistema</div>
+          <div class="support-contact">soporte.ti@pequiven.com</div>
+          <div style="font-size:0.78rem; color:var(--gris-medio); margin-top:4px;">Email / Ticket TI</div>
+        </div>
+        <div class="support-card">
+          <div class="support-icon">ℹ️</div>
+          <div class="support-label">Dudas de Uso</div>
+          <div class="support-contact">coordinacion.flota@pequiven.com</div>
+          <div style="font-size:0.78rem; color:var(--gris-medio); margin-top:4px;">Email / Teams</div>
+        </div>
+        <div class="support-card">
+          <div class="support-icon">🔍</div>
+          <div class="support-label">Acceso y Permisos</div>
+          <div class="support-contact">administracion.silt@pequiven.com</div>
+          <div style="font-size:0.78rem; color:var(--gris-medio); margin-top:4px;">Email</div>
+        </div>
+      </div>
+
+      <h3>Información para Reportar un Error</h3>
+      <div class="card">
+        <p>Al contactar soporte, incluye siempre:</p>
+        <ol class="steps">
+          <li>Tu <strong>nombre de usuario</strong> y <strong>rol</strong> en el sistema.</li>
+          <li><strong>Navegador y versión</strong> (ej: Chrome 120, Firefox 115).</li>
+          <li><strong>Captura de pantalla</strong> del error o comportamiento inesperado.</li>
+          <li><strong>Pasos exactos</strong> para reproducir el problema.</li>
+          <li><strong>Hora aproximada</strong> del incidente.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ANEXO A -->
+    <section id="glosario">
+      <div class="section-header">
+        <div class="section-num">A</div>
+        <div class="section-title-block">
+          <div class="section-tag">Anexo</div>
+          <h2>Glosario de Términos</h2>
+        </div>
+      </div>
+      <div class="card">
+        <div class="glossary-item"><span class="glossary-term">VIN</span><p class="glossary-def">Vehicle Identification Number. Código único de 17 caracteres que identifica a cada vehículo a nivel mundial.</p></div>
+        <div class="glossary-item"><span class="glossary-term">Soft Delete</span><p class="glossary-def">Eliminación lógica: el registro se marca como "eliminado" pero no se borra de la base de datos, permitiendo restaurarlo.</p></div>
+        <div class="glossary-item"><span class="glossary-term">Centro de Costo</span><p class="glossary-def">Unidad administrativa a la que se asignan los gastos operativos del vehículo (ej: Logística - Occidente).</p></div>
+        <div class="glossary-item"><span class="glossary-term">Auditoría</span><p class="glossary-def">Registro automático de quién, cuándo y qué cambió en un registro del sistema.</p></div>
+        <div class="glossary-item"><span class="glossary-term">Solicitud de Servicio</span><p class="glossary-def">Petición formal para mantenimiento o reparación generada por conductores y gestionada por coordinadores.</p></div>
+        <div class="glossary-item"><span class="glossary-term">SOAT</span><p class="glossary-def">Seguro Obligatorio de Accidentes de Tránsito. Documento requerido para la circulación legal del vehículo.</p></div>
+      </div>
+    </section>
+
+    <!-- ANEXO B -->
+    <section id="validaciones">
+      <div class="section-header">
+        <div class="section-num">B</div>
+        <div class="section-title-block">
+          <div class="section-tag">Referencia Técnica</div>
+          <h2>Validaciones del Sistema</h2>
+        </div>
+      </div>
+      <div class="alert alert-info">
+        <span class="alert-icon">ℹ️</span>
+        <div>Esta sección es referencia técnica para usuarios avanzados y personal de soporte.</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Campo</th><th>Regla de Validación</th><th>Mensaje de Error</th></tr></thead>
+          <tbody>
+            <tr><td><code>plate</code></td><td>íšnico, no vacío, formato libre</td><td><code>La placa ya está registrada</code></td></tr>
+            <tr><td><code>vin</code></td><td>íšnico, exactamente 17 caracteres alfanuméricos</td><td><code>El VIN debe tener 17 caracteres</code></td></tr>
+            <tr><td><code>chassis_number</code></td><td>íšnico si se proporciona</td><td><code>El número de chasis ya existe</code></td></tr>
+            <tr><td><code>year</code></td><td>Entre 1990 y año_actual + 1</td><td><code>Año inválido</code></td></tr>
+            <tr><td><code>odometer</code></td><td>No puede disminuir en actualizaciones</td><td><code>El kilometraje no puede retroceder</code></td></tr>
+            <tr><td><code>current_driver_id</code></td><td>El conductor no puede tener otro vehículo "actual"</td><td><code>El conductor ya tiene un vehículo asignado</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>SILT-PEQUIVEN</strong> — Sistema Integral de Logística y Transporte &nbsp;·&nbsp; Módulo de Vehículos &nbsp;·&nbsp; Versión 1.0 &nbsp;·&nbsp; Marzo 2026<br>
+  <span style="opacity:0.5; font-size:0.72rem;">Para mejoras o correcciones: coordinacion.flota@pequiven.com</span>
+  <div style="font-size: 0.9rem; color: #ffffff; opacity: 1; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; max-width: 600px; margin: 0 auto; line-height: 1.5; font-family: var(--font-body); text-transform: none; margin-top: 20px;">
+    <strong>Diseño y Arquitectura Documental: Oscar J. Martinez Paz</strong><br>
+    ✉️ ozmartinezpaz@gmail.com &nbsp;&nbsp;|&nbsp;&nbsp; 📱 (+58) 0424-2050125
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    item.classList.toggle('open');
+  }
+
+  /* ── INTERACTIVE INSPECTION SIMULATOR (USER FIDELITY) ── */
+  const SIM_PARTS = {
+    sedan:[
+      {id:1,name:"Capó"},{id:2,name:"Guardafango delantero izquierdo"},
+      {id:3,name:"Guardafango delantero derecho"},{id:4,name:"Puerta delantera izquierda"},
+      {id:5,name:"Puerta trasera izquierda"},{id:6,name:"Techo"},
+      {id:7,name:"Puerta trasera derecha"},{id:8,name:"Puerta delantera derecha"},
+      {id:9,name:"Guardafango trasero izquierdo"},{id:10,name:"Maleta y guardafango trasero derecho"}
+    ],
+    pickup:[
+      {id:1,name:"Capó"},{id:2,name:"Guardafango delantero izquierdo"},
+      {id:3,name:"Guardafango delantero derecho"},{id:4,name:"Puerta delantera izquierda"},
+      {id:5,name:"Puerta trasera izquierda"},{id:6,name:"Techo de la cabina"},
+      {id:7,name:"Puerta trasera derecha"},{id:8,name:"Puerta delantera derecha"},
+      {id:9,name:"Tolva (caja de carga)"},{id:10,name:"Compuerta trasera de la tolva"}
+    ],
+    van:[
+      {id:1,name:"Capó"},{id:2,name:"Guardafango delantero izquierdo"},
+      {id:3,name:"Guardafango delantero derecho"},{id:4,name:"Puerta delantera izquierda"},
+      {id:5,name:"Puerta corrediza lateral izquierda"},{id:6,name:"Techo"},
+      {id:7,name:"Puerta corrediza lateral derecha"},{id:8,name:"Puerta delantera derecha"},
+      {id:9,name:"Panel trasero izquierdo"},{id:10,name:"Panel trasero derecho y parachoques"}
+    ]
+  };
+  const SIM_LABELS = {sedan:"Sedán",pickup:"Camioneta Pick-up",van:"Van de Transporte"};
+  let simCur = 'sedan', simDmg = new Set(), simSel = null;
+
+  function simBadge(id, x, y) {
+    return `<rect class="badge-bg" x="${x}" y="${y}" width="22" height="22" rx="5"/>
+  <text class="bnum" x="${x+11}" y="${y+15.5}" text-anchor="middle">${id}</text>`;
+  }
+  function simZone(id, path, bx, by, extra='') {
+    let dc = simDmg.has(id) ? 'z dmg' : 'z';
+    if(simSel === id) dc += ' is-selected';
+    return `<g class="${dc}" id="zs${id}" onclick="simTog(${id})" onmouseenter="simHon(${id})" onmouseleave="simHoff(${id})">
+    <path class="area" d="${path}" ${extra}/>
+    ${simBadge(id, bx, by)}
+    </g>`;
+  }
+  function simZoneR(id, x,y,w,h, bx,by) {
+    let dc = simDmg.has(id) ? 'z dmg' : 'z';
+    if(simSel === id) dc += ' is-selected';
+    return `<g class="${dc}" id="zs${id}" onclick="simTog(${id})" onmouseenter="simHon(${id})" onmouseleave="simHoff(${id})">
+    <rect class="area" x="${x}" y="${y}" width="${w}" height="${h}" rx="5"/>
+    ${simBadge(id, bx, by)}
+    </g>`;
+  }
+
+  function drawSimSedan() {
+    return `<svg viewBox="0 0 580 310" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="simBodyGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#f0f4f8"/><stop offset="100%" stop-color="#dde4ec"/></radialGradient></defs>
+  <ellipse cx="290" cy="158" rx="265" ry="130" fill="#CBD5E1" opacity=".35"/>
+  <path d="M 60 108 Q 40 108 32 120 Q 24 132 24 158 Q 24 184 32 196 Q 40 208 60 208 L 120 208 Q 122 220 128 228 L 175 232 Q 195 238 240 240 L 340 240 Q 385 238 405 232 L 452 228 Q 458 220 460 208 L 520 208 Q 540 208 548 196 Q 556 184 556 158 Q 556 132 548 120 Q 540 108 520 108 L 460 108 Q 458 96 452 88 L 405 84 Q 385 78 340 76 L 240 76 Q 195 78 175 84 L 128 88 Q 122 96 120 108 Z" fill="url(#simBodyGrad)" stroke="#003366" stroke-width="2.2"/>
+  <path d="M 60 108 Q 44 110 36 124 Q 28 138 28 158 Q 28 178 36 192 Q 44 206 60 208 L 120 208 Q 118 200 116 188 L 112 168 L 108 148 L 110 128 L 118 112 Z" fill="#dde9f5" stroke="#003366" stroke-width="1.5"/>
+  <path d="M 520 108 Q 536 110 544 124 Q 552 138 552 158 Q 552 178 544 192 Q 536 206 520 208 L 460 208 Q 462 200 464 188 L 468 168 L 468 148 L 466 128 L 462 112 Z" fill="#dde9f5" stroke="#003366" stroke-width="1.5"/>
+  <path d="M 180 88 Q 200 80 240 78 L 240 120 Q 200 122 182 128 Z" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".85"/>
+  <path d="M 400 88 Q 380 80 340 78 L 340 120 Q 380 122 398 128 Z" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".85"/>
+  <path d="M 180 228 Q 200 236 240 238 L 240 196 Q 200 194 182 188 Z" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".85"/>
+  <path d="M 400 228 Q 380 236 340 238 L 340 196 Q 380 194 398 188 Z" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".85"/>
+  <rect x="240" y="78" width="100" height="160" rx="6" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".5"/>
+  <path d="M 32 130 Q 28 140 28 158 L 42 158 L 48 130 Z" fill="#FFD100" stroke="#003366" stroke-width="1.2" opacity=".9"/>
+  <path d="M 32 186 Q 28 176 28 158 L 42 158 L 48 186 Z" fill="#FF4444" stroke="#003366" stroke-width="1.2" opacity=".7"/>
+  <path d="M 548 130 Q 552 140 552 158 L 538 158 L 532 130 Z" fill="#FF4444" stroke="#003366" stroke-width="1.2" opacity=".7"/>
+  <path d="M 548 186 Q 552 176 552 158 L 538 158 L 532 186 Z" fill="#FFD100" stroke="#003366" stroke-width="1.2" opacity=".5"/>
+  ${[[72,118],[72,198],[490,118],[490,198]].map(([cx,cy])=>`
+  <ellipse cx="${cx}" cy="${cy}" rx="28" ry="20" fill="#2D3748" stroke="#003366" stroke-width="1.8"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="20" ry="14" fill="#4A5568" stroke="#003366" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="10" fill="#FFD100" stroke="#003366" stroke-width="1.2"/><circle cx="${cx}" cy="${cy}" r="4.5" fill="#003366"/>`).join('')}
+  ${simZone(1, 'M 64 118 L 120 118 Q 118 140 116 158 Q 118 176 120 198 L 64 198 Q 44 194 36 178 Q 30 168 30 158 Q 30 148 36 138 Q 44 122 64 118 Z', 34, 120)}
+  ${simZone(2, 'M 118 112 L 178 96 Q 196 84 240 80 L 240 120 Q 200 122 182 130 L 120 130 Z', 130, 90)}
+  ${simZone(3, 'M 118 204 L 178 220 Q 196 232 240 236 L 240 196 Q 200 194 182 186 L 120 186 Z', 130, 202)}
+  ${simZone(4, 'M 182 80 L 240 78 L 240 158 L 182 158 Q 174 140 174 130 Q 174 116 182 80 Z', 185, 90)}
+  ${simZone(5, 'M 340 78 L 400 80 Q 408 92 408 108 L 408 158 L 340 158 Z', 348, 90)}
+  ${simZoneR(6, 244, 118, 92, 80, 270, 136)}
+  ${simZone(7, 'M 340 238 L 400 236 Q 408 224 408 208 L 408 158 L 340 158 Z', 348, 202)}
+  ${simZone(8, 'M 182 236 L 240 238 L 240 158 L 182 158 Q 174 176 174 186 Q 174 200 182 236 Z', 185, 202)}
+  ${simZone(9, 'M 462 112 L 400 96 Q 382 84 340 80 L 340 120 Q 380 122 398 130 L 460 130 Z', 402, 90)}
+  ${simZone(10, 'M 462 204 L 400 220 Q 382 232 340 236 L 340 196 Q 380 194 398 186 L 460 186 Z', 402, 202)}
+  </svg>`;
+  }
+
+  function drawSimPickup() {
+    return `<svg viewBox="0 0 660 290" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="pgGrad" cx="40%" cy="50%" r="60%"><stop offset="0%" stop-color="#f0f4f8"/><stop offset="100%" stop-color="#dde4ec"/></radialGradient></defs>
+  <ellipse cx="330" cy="148" rx="300" ry="118" fill="#CBD5E1" opacity=".3"/>
+  <path d="M 52 98 Q 32 100 24 114 Q 16 128 16 148 Q 16 168 24 182 Q 32 196 52 198 L 118 198 Q 120 210 126 218 L 174 222 Q 190 226 220 228 L 300 228 Q 330 226 346 220 L 360 210 L 360 86 L 346 80 Q 330 74 300 72 L 220 72 Q 190 74 174 78 L 126 82 Q 120 90 118 98 Z" fill="url(#pgGrad)" stroke="#003366" stroke-width="2.2"/>
+  <path d="M 360 86 L 360 210 L 380 218 L 608 218 Q 624 216 632 204 Q 638 196 638 148 Q 638 100 632 92 Q 624 80 608 80 L 380 80 Z" fill="#e8eef4" stroke="#003366" stroke-width="2.2"/>
+  <rect x="240" y="72" width="60" height="152" rx="5" fill="#BFDBFE" stroke="#003366" stroke-width="1.5" opacity=".45"/>
+  ${[[70,108],[70,188],[430,108],[430,188]].map(([cx,cy])=>`
+  <ellipse cx="${cx}" cy="${cy}" rx="28" ry="20" fill="#2D3748" stroke="#003366" stroke-width="1.8"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="20" ry="14" fill="#4A5568" stroke="#003366" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="10" fill="#FFD100" stroke="#003366" stroke-width="1.2"/>`).join('')}
+  ${simZone(1, 'M 56 106 L 118 106 Q 116 128 114 148 Q 116 168 118 190 L 56 190 Q 38 186 30 170 Q 22 160 22 148 Q 22 136 30 126 Q 38 110 56 106 Z', 28, 118)}
+  ${simZone(2, 'M 116 100 L 174 86 Q 192 76 240 74 L 240 118 Q 196 120 180 128 L 120 128 Z', 126, 88)}
+  ${simZone(3, 'M 116 196 L 174 210 Q 192 220 240 222 L 240 178 Q 196 176 180 168 L 120 168 Z', 126, 200)}
+  ${simZone(4, 'M 178 78 L 240 74 L 240 148 L 180 148 Q 172 136 172 126 Q 172 108 178 78 Z', 183, 90)}
+  ${simZone(5, 'M 300 74 L 346 80 Q 354 94 354 110 L 354 148 L 300 148 Z', 307, 88)}
+  ${simZoneR(6, 243, 108, 56, 80, 252, 124)}
+  ${simZone(7, 'M 300 222 L 346 216 Q 354 202 354 186 L 354 148 L 300 148 Z', 307, 192)}
+  ${simZone(8, 'M 178 218 L 240 222 L 240 148 L 180 148 Q 172 160 172 170 Q 172 188 178 218 Z', 183, 196)}
+  ${simZoneR(9, 363, 90, 240, 116, 460, 106)}
+  ${simZoneR(10, 604, 90, 30, 116, 605, 104)}
+  </svg>`;
+  }
+
+  function drawSimVan() {
+    return `<svg viewBox="0 0 720 290" xmlns="http://www.w3.org/2000/svg">
+  <defs><radialGradient id="vgGrad" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="#f0f4f8"/><stop offset="100%" stop-color="#dde4ec"/></radialGradient></defs>
+  <ellipse cx="360" cy="148" rx="340" ry="118" fill="#CBD5E1" opacity=".3"/>
+  <path d="M 58 96 Q 36 98 26 114 Q 18 130 18 148 Q 18 166 26 182 Q 36 198 58 200 L 124 200 Q 128 212 136 220 L 188 226 Q 220 230 270 232 L 450 232 Q 500 230 532 226 L 584 220 Q 592 212 596 200 L 660 200 Q 682 198 692 182 Q 700 166 700 148 Q 700 130 692 114 Q 682 98 660 96 L 596 96 Q 592 84 584 76 L 532 70 Q 500 66 450 64 L 270 64 Q 220 66 188 70 L 136 76 Q 128 84 124 96 Z" fill="url(#vgGrad)" stroke="#003366" stroke-width="2.2"/>
+  <rect x="270" y="64" width="316" height="168" rx="6" fill="#BFDBFE" stroke="#003366" stroke-width="1.2" opacity=".25"/>
+  ${[[80,108],[80,188],[560,108],[560,188]].map(([cx,cy])=>`
+  <ellipse cx="${cx}" cy="${cy}" rx="30" ry="20" fill="#2D3748" stroke="#003366" stroke-width="1.8"/>
+  <ellipse cx="${cx}" cy="${cy}" rx="22" ry="14" fill="#4A5568" stroke="#003366" stroke-width="1"/><circle cx="${cx}" cy="${cy}" r="11" fill="#FFD100" stroke="#003366" stroke-width="1.2"/>`).join('')}
+  ${simZone(1, 'M 62 104 L 124 104 Q 122 126 120 148 Q 122 170 124 192 L 62 192 Q 44 188 32 172 Q 24 162 24 148 Q 24 134 32 124 Q 44 108 62 104 Z', 30, 116)}
+  ${simZone(2, 'M 122 98 L 188 78 Q 216 68 270 66 L 270 116 Q 218 118 194 126 L 124 126 Z', 134, 86)}
+  ${simZone(3, 'M 122 198 L 188 218 Q 216 228 270 230 L 270 180 Q 218 178 194 170 L 124 170 Z', 134, 202)}
+  ${simZone(4, 'M 192 68 L 270 64 L 270 148 L 192 148 Q 182 134 182 120 Q 182 100 192 68 Z', 195, 82)}
+  ${simZone(5, 'M 270 66 L 520 66 L 520 104 L 278 104 Q 272 90 270 66 Z', 288, 74)}
+  ${simZoneR(6, 274, 112, 242, 72, 360, 128)}
+  ${simZone(7, 'M 270 230 L 520 230 L 520 192 L 278 192 Q 272 208 270 230 Z', 288, 202)}
+  ${simZone(8, 'M 192 228 L 270 232 L 270 148 L 192 148 Q 182 162 182 176 Q 182 196 192 228 Z', 195, 198)}
+  ${simZoneR(9, 524, 68, 62, 72, 534, 78)}
+  ${simZoneR(10, 524, 188, 100, 72, 534, 196)}
+  </svg>`;
+  }
+
+  function renderSim() {
+    const parts = SIM_PARTS[simCur];
+    document.getElementById('hSimSub').textContent = `Inspección visual técnica — ${SIM_LABELS[simCur]}`;
+    const fns = {sedan: drawSimSedan, pickup: drawSimPickup, van: drawSimVan};
+    document.getElementById('simSvgWrap').innerHTML = fns[simCur]();
+    document.getElementById('simPList').innerHTML = parts.map(p => {
+      const d = simDmg.has(p.id);
+      return `<div class="sim-prow${d?' dmg':''}" id="rs${p.id}" onclick="simTog(${p.id})" onmouseenter="simHon(${p.id})" onmouseleave="simHoff(${p.id})"><div class="sim-pnum">${p.id}</div><span class="sim-pname">${p.name}</span>${d?'<span style="font-size:12px;">⚠️</span>':''}</div>`;
+    }).join('');
+    const b = document.getElementById('simBadge');
+    b.textContent = simDmg.size > 0 ? `${simDmg.size} daño${simDmg.size>1?'s':''}` : 'Sin daños';
+    b.className = 'sim-badge' + (simDmg.size > 0 ? ' has' : '');
+    document.getElementById('btnSimClear').style.display = simDmg.size > 0 ? 'block' : 'none';
+    const s = document.getElementById('simSummary');
+    if (simDmg.size > 0) {
+      s.className = 'sim-summary on';
+      document.getElementById('simSumTitle').textContent = `Resumen de daños (${simDmg.size})`;
+      document.getElementById('simSumChips').innerHTML = parts.filter(p => simDmg.has(p.id)).map(p => `<span class="sim-chip" onclick="simTog(${p.id})">${p.name}</span>`).join('');
+    } else { s.className = 'sim-summary'; }
+  }
+
+  function simTog(id) { 
+    if(simDmg.has(id)) { simDmg.delete(id); simSel = null; } 
+    else { simDmg.add(id); simSel = id; }
+    renderSim(); 
+  }
+  function simHon(id) { const z=document.getElementById('zs'+id); if(z&&!simDmg.has(id)) z.classList.add('hov'); }
+  function simHoff(id) { const z=document.getElementById('zs'+id); if(z) z.classList.remove('hov'); }
+  function switchSimV(type, btn) {
+    simCur = type; simDmg = new Set();
+    document.querySelectorAll('.sim-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active'); renderSim();
+  }
+  function clearSimAll() { simDmg = new Set(); renderSim(); }
+
+  // Date Logic
+  const D_SIM = new Date();
+  const DIAS_S = ['DOMINGO','LUNES','MARTES','MIí‰RCOLES','JUEVES','VIERNES','SÁBADO'];
+  const MES_S = ['ENERO','FEBRERO','MARZO','ABRIL','MAYO','JUNIO','JULIO','AGOSTO','SEPTIEMBRE','OCTUBRE','NOVIEMBRE','DICIEMBRE'];
+  document.getElementById('hSimDate').textContent = `${DIAS_S[D_SIM.getDay()]}, ${D_SIM.getDate()} DE ${MES_S[D_SIM.getMonth()]}`;
+
+  renderSim();
+
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

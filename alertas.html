@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario — Gestión de Alertas | SILT-PEQUIVEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul: #003366;
+    --azul-medio: #004a99;
+    --azul-claro: #e8f0fb;
+    --rojo: #CF142B;
+    --rojo-claro: #fce4e7;
+    --amarillo: #FFD100;
+    --amarillo-claro: #fffbe6;
+    --gris-oscuro: #1a1a2e;
+    --gris-texto: #333333;
+    --gris-medio: #6b7280;
+    --gris-borde: #dde3ec;
+    --gris-fondo: #f4f6fb;
+    --blanco: #ffffff;
+    --font-display: 'Barlow Condensed', sans-serif;
+    --font-body: 'Source Serif 4', serif;
+    --font-code: 'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--gris-texto);
+    background: var(--gris-fondo);
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--azul);
+    color: var(--blanco);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,51,102,0.18);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 32px;
+    gap: 20px;
+  }
+  .logo-area { display: flex; align-items: center; gap: 14px; }
+  .logo-badge {
+    background: var(--rojo);
+    color: var(--blanco);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    padding: 8px 14px;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 100%, 8px 100%);
+  }
+  .logo-text { font-family: var(--font-display); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; opacity: 0.9; }
+  .logo-sub { font-size: 0.72rem; opacity: 0.6; letter-spacing: 0.06em; font-family: var(--font-display); text-transform: uppercase; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #001f44 0%, #003366 60%, #004a99 100%);
+    color: var(--blanco);
+    padding: 64px 32px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--amarillo); }
+  .hero-desc {
+    font-size: 1.05rem;
+    opacity: 0.78;
+    max-width: 560px;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  /* ── LAYOUT ── */
+  .page-body { max-width: 1280px; margin: 0 auto; padding: 40px 32px; display: grid; grid-template-columns: 260px 1fr; gap: 40px; align-items: start; }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    position: sticky;
+    top: 72px;
+    background: var(--blanco);
+    border: 1px solid var(--gris-borde);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,51,102,0.07);
+  }
+  .sidebar-title {
+    background: var(--azul);
+    color: var(--blanco);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 18px;
+  }
+  .sidebar nav { padding: 10px 0; }
+  .sidebar a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 18px;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--gris-texto);
+    text-decoration: none;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .sidebar a.active { color: var(--rojo); background: var(--rojo-claro); border-left-color: var(--rojo); }
+
+  /* ── CONTENT ── */
+  .content > section {
+    margin-bottom: 56px;
+    padding: 30px;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid transparent;
+  }
+  .content > section:hover {
+    background: var(--blanco);
+    border-color: var(--azul-claro);
+    box-shadow: 0 12px 40px rgba(0,51,102,0.08);
+  }
+  .section-header {
+    display: flex; align-items: flex-end; gap: 16px;
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--gris-borde);
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--gris-borde);
+    line-height: 1;
+    margin-bottom: -4px;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    font-weight: 800;
+    color: var(--azul);
+  }
+
+  /* REPRODUCCION MOCKUP UI ALERTAS */
+  .dashboard-mockup {
+      border: 1px solid var(--gris-borde);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+      font-family: Arial, sans-serif;
+  }
+  .mock-header {
+      background: #fff;
+      padding: 20px;
+      border-bottom: 1px solid var(--gris-borde);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  }
+  .mock-title { font-weight:bold; color:var(--rojo); font-size:1.5rem; display:flex; align-items:center; gap:10px; }
+  .mock-subtitle { color:var(--azul); font-size:0.85rem; padding-left:45px; margin-top:-5px; }
+  .mock-controls { display:flex; gap:10px; }
+  .mock-btn-white { padding:8px 15px; border:1px solid #cbd5e1; border-radius:6px; background:#fff; font-weight:bold; font-size:0.85rem; color:#64748b; }
+  .mock-btn-yellow { padding:8px 15px; border:none; border-radius:30px; background:var(--amarillo); font-weight:bold; font-size:0.85rem; color:var(--azul); display:flex; align-items:center; gap:5px; }
+
+  .mock-filters {
+      background: #fff;
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--gris-borde);
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      font-size: 0.9rem;
+  }
+  .filter-pill { padding:4px 12px; border-radius:15px; font-weight:bold; font-size:0.8rem; }
+  .pill-todas { background:var(--azul); color:#fff; }
+  .pill-crit { color:var(--rojo); background:#fce4e7; }
+  .pill-adv { color:#d97706; background:#fef3c7; }
+  .pill-info { color:var(--azul); background:#e0f2fe; }
+
+  .mock-body { background: #f8fafc; padding: 20px; }
+  .alert-card {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 15px 20px;
+      margin-bottom: 10px;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+  }
+  .ac-info { border-left: 4px solid #3b82f6; background:#f0f9ff; }
+  .ac-crit { border-left: 4px solid var(--rojo); background:#fff1f2; }
+  
+  .ac-title { font-weight:bold; color:#1e293b; margin-bottom:5px; font-size:1rem; }
+  .ac-desc { font-size:0.85rem; color:#64748b; margin-bottom:10px; }
+  .ac-date { font-size:0.75rem; color:#94a3b8; }
+  .ac-badge { padding:3px 10px; border-radius:4px; font-weight:bold; font-size:0.7rem; font-family:var(--font-display); margin-bottom:8px;}
+  .badge-i { background:#dbeafe; color:#1d4ed8; }
+  .badge-c { background:#fee2e2; color:#b91c1c; }
+
+  /* TELEGRAM TIMELINE */
+  .tl-container { border-left: 2px dashed #94a3b8; padding-left: 20px; margin: 30px 0 30px 20px; }
+  .tl-node { position:relative; margin-bottom: 25px; }
+  .tl-dot { position:absolute; left:-29px; top:0; width:16px; height:16px; border-radius:50%; background:var(--azul); border:3px solid #fff; }
+  .tl-dot.red { background:var(--rojo); }
+  .tl-dot.green { background:#059669; }
+
+  /* UI RADIODIFUSION */
+  .broadcast-panel { background:#fff; border:1px solid var(--gris-borde); border-radius:8px; padding:25px; box-shadow:0 4px 15px rgba(0,0,0,0.03); }
+  .form-group { margin-bottom: 15px; }
+  .form-label { display:block; font-family:var(--font-display); font-size:0.8rem; font-weight:800; color:var(--azul); text-transform:uppercase; margin-bottom:8px; }
+  .form-input, .form-select, .form-textarea { width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:6px; font-family:var(--font-body); font-size:0.95rem; }
+  
+  .checkbox-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap:10px; }
+  .chk-label { display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--gris-texto); cursor:pointer; }
+  
+  /* FOOTER */
+  footer { background: var(--azul); color: #fff; text-align: center; padding: 40px 32px; font-family: var(--font-display); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">PEQUIVEN</div>
+      <div>
+        <div class="logo-text">SILT · Sistema Integral de Logística</div>
+        <div class="logo-sub">Manual de Usuario — Gestión de Alertas</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Centro de Monitoreo y <span>Alertas Proactivas</span></h1>
+    <p class="hero-desc">Consola central de trazabilidad para notificaciones críticas, desviaciones presupuestarias y radiodifusión interna dirigida a Operadores en Ruta.</p>
+  </div>
+</div>
+
+<div class="page-body">
+  <aside class="sidebar">
+    <div class="sidebar-title">🏠 Navegación</div>
+    <nav style="border-bottom: 1px solid var(--gris-borde); margin-bottom: 10px; padding-bottom: 10px;">
+      <a href="index.html" style="color: var(--rojo); font-weight: 800;">Ver Índice General</a>
+    </nav>
+    <div class="sidebar-title">📋 Contenido</div>
+    <nav>
+      <a href="#dashboard" class="active">01 El Dashboard</a>
+      <a href="#telegram">02 Persistencia Telegram</a>
+      <a href="#creacion">03 Creación Colectiva</a>
+    </nav>
+  </aside>
+
+  <main class="content">
+
+    <section id="dashboard">
+      <div class="section-header">
+        <div class="section-num">01</div>
+        <h2>El Dashboard de Monitoreo</h2>
+      </div>
+      <p style="margin-bottom:25px;">La consola gerencial cataloga gráficamente toda actividad anómala detectada por el sistema SILT, forzando la atención inmediata para resolver problemas inminentes o autorizaciones pendientes.</p>
+      
+      <!-- REPRODUCCION DEL MOCKUP CAPTURA -->
+      <div class="dashboard-mockup">
+          <div class="mock-header">
+              <div>
+                  <div class="mock-title"><div style="background:var(--azul); color:#fff; width:35px; height:35px; border-radius:50%; display:flex; justify-content:center; align-items:center;">🔔</div> CENTRO DE ALERTAS</div>
+                  <div class="mock-subtitle">Notificaciones críticas, preventivas e informativas</div>
+              </div>
+              <div class="mock-controls">
+                  <button class="mock-btn-white">↻ ACTUALIZAR</button>
+                  <button class="mock-btn-yellow">✔ MARCAR TODO COMO LEÍDO</button>
+              </div>
+          </div>
+          <div class="mock-filters">
+              <span style="color:#64748b;">Filtrar por severidad:</span>
+              <span class="filter-pill pill-todas">Todas</span>
+              <span class="filter-pill pill-crit">Críticas</span>
+              <span class="filter-pill pill-adv">Advertencias</span>
+              <span class="filter-pill pill-info">Informativas</span>
+              <div style="margin-left:auto; display:flex; align-items:center; gap:8px;">
+                  <input type="checkbox" id="no-leidas"> <label for="no-leidas" style="color:#64748b; font-weight:bold;">Solo no leídas</label>
+              </div>
+          </div>
+          <div class="mock-body">
+              <div style="font-weight:bold; color:var(--azul); margin-bottom:15px; font-size:0.85rem;">🚨 ALERTAS ACTIVAS</div>
+              
+              <div class="alert-card ac-info">
+                  <div>
+                      <div class="ac-title">Solicitud REQ-2026-0006 Aprobada</div>
+                      <div class="ac-desc">La solicitud REQ-2026-0006 ha sido procesada por admin.</div>
+                      <div class="ac-date">28/03/2026 23:57</div>
+                  </div>
+                  <div style="text-align:right; display:flex; flex-direction:column; align-items:flex-end;">
+                      <span class="ac-badge badge-i">INFO</span>
+                      <a href="#" style="font-size:0.8rem; color:#3b82f6; text-decoration:none; margin-top:5px;">Marcar leída</a>
+                  </div>
+              </div>
+
+              <div class="alert-card ac-crit">
+                  <div>
+                      <div class="ac-title">Alerta de presupuesto - CC 11001</div>
+                      <div class="ac-desc">Consumo de combustible alcanzó el 125% del presupuesto mensual</div>
+                      <div class="ac-date">28/03/2026 00:23</div>
+                  </div>
+                  <div style="text-align:right;">
+                      <span class="ac-badge badge-c">CRITICAL</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </section>
+
+    <!-- BUClE TELEGRAM -->
+    <section id="telegram">
+      <div class="section-header">
+        <div class="section-num">02</div>
+        <h2>Persistencia Estricta por Telegram</h2>
+      </div>
+      <p>El sistema cuenta con un bot vinculado operativamente ("SILT Bot"). Las Alertas Críticas (<em>Ej. Presupuesto Excedido o Siniestro Vial</em>) no se limitan a un parpadeo en pantalla. Ejecutan un <strong>Ciclo de Insistencia en Bucle</strong> hasta ser resueltas.</p>
+      
+      <div class="tl-container">
+          <div class="tl-node">
+              <div class="tl-dot red"></div>
+              <strong style="color:var(--rojo);">Hora Cero: Detección y Disparo Primario</strong>
+              <p style="font-size:0.9rem; margin:0;">El servidor detecta el estallido (ej. Consumo al 125%) y despacha inmediatamente un mensaje Push a los móviles por Telegram de los Supervisores y el responsable del CC.</p>
+          </div>
+          <div class="tl-node">
+              <div class="tl-dot"></div>
+              <strong style="color:var(--azul);">Iteración de Insistencia Automática</strong>
+              <p style="font-size:0.9rem; margin:0;">Si la alerta no es cambiada a estado "RESUELTA" dentro de SILT, un cronjob (rutina de servidor) repite el mensaje en los chats de Telegram de la gerencia <strong>cada determinada franja de horas</strong> de forma continua. La alerta no caduca por tiempo.</p>
+          </div>
+          <div class="tl-node">
+              <div class="tl-dot green"></div>
+              <strong style="color:#059669;">Cierre y Trazabilidad Resolutiva</strong>
+              <p style="font-size:0.9rem; margin:0;">Alguien accede al portal web y marca la incidencia como subsanada. El Bucle cesa. SILT registra en auditoría el Nombre del usuario que cerró la alerta para responsabilidades futuras.</p>
+          </div>
+      </div>
+    </section>
+
+    <section id="creacion">
+      <div class="section-header">
+        <div class="section-num">03</div>
+        <h2>Creación de Alertas Colectivas</h2>
+      </div>
+      <p style="margin-bottom:20px;">Utilidad exclusiva para <strong>Gerentes, Coordinadores y Supervisores</strong> orientada a emitir comunicados urgentes o advertencias meteorológicas a flotas enteras o grupos específicos.</p>
+
+      <div class="broadcast-panel">
+          <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:800; color:var(--azul); border-bottom:1px solid #e2e8f0; padding-bottom:15px; margin-bottom:20px;">
+              📻 NUEVA RADIODIFUSIÓN COLECTIVA
+          </div>
+
+          <div style="display:grid; grid-template-columns: 2fr 1fr; gap:20px;">
+              <div>
+                  <div class="form-group">
+                      <label class="form-label">Asunto (Título de Alerta)</label>
+                      <input type="text" class="form-input" placeholder="Ej: Precaución - Lluvia Extrema en Autopista Centro">
+                  </div>
+                  <div class="form-group">
+                      <label class="form-label">Mensaje Central</label>
+                      <textarea class="form-textarea" rows="4" placeholder="Detalle la orden del comunicado..."></textarea>
+                  </div>
+              </div>
+              
+              <div style="background:#f8fafc; padding:20px; border-radius:6px; border:1px solid #e2e8f0;">
+                  <div class="form-group">
+                      <label class="form-label">Nivel Severidad</label>
+                      <select class="form-select">
+                          <option>🟡 ADVERTENCIA</option>
+                          <option>🔵 INFORMATIVA</option>
+                          <option>🔴 CRÍTICA</option>
+                      </select>
+                  </div>
+                  
+                  <div class="form-group" style="margin-top:20px;">
+                      <label class="form-label">Seleccionar Audiencia (Roles Destino)</label>
+                      <div class="checkbox-grid">
+                          <label class="chk-label"><input type="checkbox" checked> OPR. Conductores</label>
+                          <label class="chk-label"><input type="checkbox"> Jefes de Taller</label>
+                          <label class="chk-label"><input type="checkbox"> Proveedores Ex.</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          
+          <div style="margin-top:20px; text-align:right;">
+             <button class="mock-btn-yellow" style="display:inline-flex; width:auto; font-size:1rem; padding:12px 25px;">
+                 🚀 DISPARAR ALERTA COLECTIVA
+             </button>
+          </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div style="margin-bottom: 20px;">
+      <strong style="color:var(--amarillo); font-size:1.1rem; letter-spacing:0.05em;">SILT-PEQUIVEN</strong> — Sistema Integral de Logística y Transporte<br>
+      <span style="opacity:0.6; font-size:0.9rem;">Manuales Institucionales v1.0 &nbsp;·&nbsp; Ingeniería de Software PEQUIVEN</span>
+  </div>
+  
+  <div style="font-size: 0.9rem; color: #ffffff; opacity: 1; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; max-width: 600px; margin: 0 auto; line-height: 1.5;">
+    <strong>Diseño y Arquitectura Documental: Oscar J. Martinez Paz</strong><br>
+    ✉️ ozmartinezpaz@gmail.com &nbsp;&nbsp;|&nbsp;&nbsp; 📱 (+58) 0424-2050125
+  </div>
+</footer>
+
+</body>
+</html>
