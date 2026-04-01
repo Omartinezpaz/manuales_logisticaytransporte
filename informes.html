@@ -159,6 +159,8 @@ footer strong{color:var(--amarillo)}
       <a href="#s6"><span>06</span> Catálogo de KPIs Soportados</a>
       <a href="#s7"><span>07</span> Cierres de Gestión (Gráficos)</a>
       <a href="#s8"><span>08</span> Tendencia Mensual Extendido</a>
+      <a href="#s9"><span>09</span> Configuración de Envíos</a>
+      <a href="#s10"><span>10</span> Auditoría y Soporte</a>
     </nav>
   </aside>
 
@@ -492,6 +494,57 @@ footer strong{color:var(--amarillo)}
           </div>
           
         </div>
+      </div>
+    </section>
+
+    <!-- S9: AUTOMATIZACIÓN Y MAPAS GEOGRÁFICOS -->
+    <section id="s9">
+      <div class="section-header"><div class="section-num">09</div><h2>Automatización de Envíos y Análisis Geográfico</h2></div>
+      
+      <h3>Suscripción y Envío Automático (Cron Jobs)</h3>
+      <p>Los gerentes logísticos no siempre tienen tiempo para acceder al dashboard a extraer datos de forma manual. Por ello, SILT integra un módulo de configuración de **"Suscripciones Automáticas"**.</p>
+      <ul style="margin-left:20px; line-height:2; margin-bottom:20px;">
+        <li>Se pueden crear reglas tipo: <em>"Generar PDF de KPIs de Mantenimiento todos los viernes a las 16:00"</em>.</li>
+        <li>El sistema enviará el reporte directamente al correo corporativo <code>@pequiven.com</code>.</li>
+        <li>Soporta envíos a grupos de distribución gerencial.</li>
+      </ul>
+
+      <h3>Reportes Georreferenciados (Rutas y Peajes)</h3>
+      <p>Debido a que somos una empresa de transporte pesado a nivel nacional, la plataforma cruza los datos del Módulo de Solicitudes/Traslados para mostrar métricas críticas sobre la cartografía venezolana:</p>
+      <div class="alert-box" style="background:#fff; border:1px solid var(--gris-borde); display:flex; gap:15px; align-items:flex-start;">
+        <span style="font-size:2rem;">🗺️</span>
+        <div>
+          <strong style="color:var(--azul);">Mapas de Calor de Flota:</strong>
+          <p style="margin-top:5px; font-size:0.9rem; color:var(--gris-texto);">Detecta *Cuellos de Botella* analizando el tiempo promedio que las unidades pasan detenidas en estaciones de servicio específicas, alcabalas de seguridad o vías interurbanas deterioradas (Ej. Eje Morón - Falcón).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- S10: AUDITORÍA Y SOPORTE -->
+    <section id="s10">
+      <div class="section-header"><div class="section-num">10</div><h2>Auditoría Criptográfica y Soporte Técnico</h2></div>
+      
+      <h3>Trazabilidad y Log de Acciones Transparentes</h3>
+      <p>Cualquier modificación o exportación dentro del sistema deja un rastro inmutable (Log). Si se necesita presentar un reporte ante el departamento de Cumplimiento o Auditoría Interna, el reporte contendrá en su pie de página un <em>Hash de Verificación</em>:</p>
+      
+      <div style="background:var(--gris-oscuro); color:#fff; font-family:var(--font-code); padding:15px; border-radius:6px; font-size:0.8rem; margin:15px 0;">
+        <div style="color:#10b981; margin-bottom:8px;">[AUDIT-LOG] EXPORTACIÓN EXITOSA</div>
+        > USUARIO: j.perez@pequiven.com (Rol: Gerente Transporte)<br>
+        > ACCIÓN: Export_PDF_Costos_Marzo_2026<br>
+        > HORA SECURE_SERVER: 2026-04-01 14:02:11 VET<br>
+        > IP/TOKEN: 192.168.10.44 / Bearer eyJh...
+      </div>
+
+      <h3 style="margin-top:40px;">Soporte Técnico Especializado</h3>
+      <p>Si experimentas problemas con la exportación masiva de datos a Excel, o los Semáforos no actualizan en tiempo real debido a la carga del servidor (Timeout de Base de Datos):</p>
+      
+      <div class="alert-box info">
+        <strong style="color:var(--azul);">Pasos para solución de problemas en Informes SILT:</strong>
+        <ol style="margin-top:10px; margin-left:20px; font-size:0.9rem;">
+          <li>Verifica que no estás consultando un rango de fechas exageradamente largo (Ej. Rango de 5 años), lo que podría colapsar la memoria de tu navegador. Ajusta a <em>"Anual"</em>.</li>
+          <li>Asegúrate de que la Tasa de Cambio (VES/USD) se haya actualizado durante el día en curso; si falla la conexión al BCV, el botón "Mostrar en USD" se deshabilitará por seguridad.</li>
+          <li>Si el error persiste (Ej. Error 500 al descargar PDF), contacta urgente a la sala de servidores logísticos ext. 3020 o levanta un ticket en el Service Desk interno de IT.</li>
+        </ol>
       </div>
     </section>
 
