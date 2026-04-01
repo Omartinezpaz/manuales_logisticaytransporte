@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario — MOD-20 Informes e Indicadores | SILT-PEQUIVEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--azul:#003366;--azul-medio:#004a99;--azul-claro:#e8f0fb;--rojo:#CF142B;--rojo-claro:#fce4e7;--amarillo:#FFD100;--amarillo-claro:#fffbe6;--verde:#0d9488;--verde-claro:#ccfbf1;--gris-oscuro:#1a1a2e;--gris-texto:#333;--gris-medio:#6b7280;--gris-borde:#dde3ec;--gris-fondo:#f4f6fb;--blanco:#fff;--font-display:'Barlow Condensed',sans-serif;--font-body:'Source Serif 4',serif;--font-code:'JetBrains Mono',monospace}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);font-size:16px;color:var(--gris-texto);background:var(--gris-fondo);line-height:1.7}
+
+.dev-banner{background:linear-gradient(90deg,var(--amarillo),#f59e0b);color:var(--azul);text-align:center;padding:12px;font-family:var(--font-display);font-weight:800;font-size:.9rem;letter-spacing:.05em;position:sticky;top:0;z-index:1000;box-shadow:0 4px 10px rgba(255,209,0,.3)}
+.site-header{background:var(--azul);color:var(--blanco);position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,51,102,.18)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:14px 32px;gap:20px}
+.logo-area{display:flex;align-items:center;gap:14px}
+.logo-badge{background:var(--rojo);color:var(--blanco);font-family:var(--font-display);font-weight:800;font-size:1.15rem;letter-spacing:.08em;padding:8px 14px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 100%,8px 100%)}
+.logo-text{font-family:var(--font-display);font-weight:700;font-size:1rem;letter-spacing:.04em;opacity:.9}
+.logo-sub{font-size:.72rem;opacity:.6;letter-spacing:.06em;font-family:var(--font-display);text-transform:uppercase}
+.header-ver{font-family:var(--font-code);font-size:.7rem;opacity:.5;background:rgba(255,255,255,.1);padding:4px 10px;border-radius:4px}
+
+.hero{color:var(--blanco);padding:64px 32px 56px;position:relative;overflow:hidden;background:linear-gradient(135deg,#0f172a 0%,#2c3e50 50%,#b45309 100%)}
+.hero::after{content:'📈';position:absolute;right:60px;top:50%;transform:translateY(-50%);font-size:12rem;opacity:.06}
+.hero-inner{max-width:860px;margin:0 auto;position:relative;z-index:1}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1.05;letter-spacing:-.01em;margin-bottom:18px}
+.hero h1 span{color:var(--amarillo)}
+.hero-desc{font-size:1.05rem;opacity:.78;max-width:600px;margin-bottom:32px;font-weight:300}
+.hero-badges{display:flex;gap:10px;flex-wrap:wrap}
+.hero-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);padding:6px 16px;border-radius:20px;font-family:var(--font-display);font-size:.78rem;font-weight:700;backdrop-filter:blur(4px)}
+
+.page-body{max-width:1280px;margin:0 auto;padding:40px 32px;display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start}
+.sidebar{position:sticky;top:72px;background:var(--blanco);border:1px solid var(--gris-borde);border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,51,102,.07)}
+.sidebar-title{background:var(--azul);color:var(--blanco);font-family:var(--font-display);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:12px 18px}
+.sidebar nav{padding:10px 0}
+.sidebar a{display:flex;align-items:center;gap:10px;padding:9px 18px;font-family:var(--font-display);font-size:.88rem;font-weight:600;color:var(--gris-texto);text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+.sidebar a:hover{color:var(--azul);background:var(--azul-claro);border-left-color:var(--azul)}
+.sidebar a.active{color:var(--rojo);background:var(--rojo-claro);border-left-color:var(--rojo)}
+.sidebar .back-link{color:var(--azul-medio);font-size:.82rem;padding:14px 18px;border-bottom:1px solid var(--gris-borde)}
+
+.content>section{margin-bottom:56px;padding:24px;border-radius:12px;transition:all .4s;border:1px solid transparent}
+.content>section:hover{background:var(--blanco);border-color:var(--azul-claro);box-shadow:0 12px 40px rgba(0,51,102,.08);transform:translateY(-4px)}
+.section-header{display:flex;align-items:flex-end;gap:16px;margin-bottom:28px;border-bottom:2px solid var(--gris-borde);padding-bottom:14px}
+.section-num{font-family:var(--font-display);font-size:3.5rem;font-weight:800;color:var(--gris-borde);line-height:1}
+h2{font-family:var(--font-display);font-size:1.85rem;font-weight:800;color:var(--azul);letter-spacing:-.01em;line-height:1.1}
+h3{font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--azul);margin:28px 0 12px}
+h3::before{content:'';width:4px;height:18px;background:var(--rojo);display:inline-block;border-radius:2px;margin-right:8px;vertical-align:middle}
+p{margin-bottom:14px}
+
+/* MOCK COMPONENTS */
+.mock-dashboard{background:var(--blanco);border:1px solid var(--gris-borde);border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.04);margin:20px 0}
+.mock-dash-header{background:linear-gradient(90deg,var(--azul),var(--azul-medio));color:#fff;padding:16px 24px;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-display)}
+.mock-dash-header h4{font-weight:700;font-size:1rem}
+.mock-dash-toolbar{background:#f8fafc;padding:12px 24px;border-bottom:1px solid var(--gris-borde);display:flex;gap:12px;align-items:center}
+.mock-dash-body{padding:24px}
+
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi-card{background:var(--blanco);border:1px solid var(--gris-borde);border-radius:8px;padding:18px;text-align:center;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.blue::before{background:var(--azul)}
+.kpi-card.green::before{background:var(--verde)}
+.kpi-card.yellow::before{background:var(--amarillo)}
+.kpi-card.red::before{background:var(--rojo)}
+.kpi-label{font-family:var(--font-display);font-size:.7rem;font-weight:800;color:var(--gris-medio);text-transform:uppercase;letter-spacing:.05em}
+.kpi-value{font-family:var(--font-display);font-size:1.8rem;font-weight:800;margin:6px 0}
+.kpi-card.blue .kpi-value{color:var(--azul)}
+.kpi-card.green .kpi-value{color:var(--verde)}
+.kpi-card.yellow .kpi-value{color:#b45309}
+.kpi-card.red .kpi-value{color:var(--rojo)}
+.kpi-sub{font-size:.72rem;color:var(--gris-medio);display:flex;justify-content:center;align-items:center;gap:4px}
+.kpi-trend-up{color:var(--verde);font-weight:bold}
+.kpi-trend-down{color:var(--rojo);font-weight:bold}
+
+.pqv-table{width:100%;border-collapse:collapse;margin:20px 0;background:#fff;border:1px solid var(--gris-borde);border-radius:6px;overflow:hidden}
+.pqv-table th{background:var(--azul);color:#fff;text-align:left;padding:12px 16px;font-family:var(--font-display);font-weight:700;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em}
+.pqv-table td{padding:12px 16px;font-size:.88rem;border-bottom:1px solid #f1f5f9;color:var(--gris-texto)}
+.pqv-table tr:hover td{background:var(--azul-claro)}
+.pqv-table .total-row td{background:#e8f4fd;font-weight:700;border-top:2px solid var(--azul)}
+.pqv-table .currency{text-align:right;font-family:var(--font-code);font-variant-numeric:tabular-nums}
+
+.chart-fake{height:250px;background:repeating-linear-gradient(45deg,#f8fafc,#f8fafc 10px,#fff 10px,#fff 20px);border:1px solid var(--gris-borde);border-radius:8px;position:relative;margin:20px 0;display:flex;align-items:center;justify-content:center;font-family:var(--font-code);color:var(--gris-medio);flex-direction:column}
+
+.toolbar-btn{background:#fff;border:1px solid #cbd5e1;padding:6px 14px;border-radius:6px;font-family:var(--font-body);font-size:.85rem;color:#334155;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.toolbar-btn:hover{background:#f1f5f9}
+.toolbar-btn.primary{background:var(--azul);color:#fff;border-color:var(--azul-medio)}
+.toolbar-btn.primary:hover{background:var(--azul-medio)}
+.toolbar-select{padding:6px 10px;border:1px solid #cbd5e1;border-radius:6px;font-family:var(--font-body);font-size:.85rem;color:#334155;background:#fff}
+
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-family:var(--font-display);font-size:.7rem;font-weight:800;letter-spacing:.03em}
+.tag-print{background:#f3e8ff;color:#6b21a8;border:1px solid #d8b4fe}
+
+.alert-box{border-radius:8px;padding:16px 20px;margin:16px 0;display:flex;gap:12px;align-items:flex-start;font-size:.92rem}
+.alert-box.info{background:var(--azul-claro);border-left:4px solid var(--azul);color:var(--azul)}
+
+footer{background:var(--azul);color:rgba(255,255,255,.6);text-align:center;padding:24px 32px;font-family:var(--font-display);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+footer strong{color:var(--amarillo)}
+
+@media(max-width:900px){.page-body{grid-template-columns:1fr}.sidebar{position:relative;top:0}.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="dev-banner">🚧 PROTO / MANUAL DISPONIBLE — MOD-20 Informes e Indicadores</div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">PEQUIVEN</div>
+      <div>
+        <div class="logo-text">SILT · Sistema Integral de Logística</div>
+        <div class="logo-sub">Manual de Usuario — MOD-20 Informes e Indicadores</div>
+      </div>
+    </div>
+    <div class="header-ver">v1.0 &nbsp; Marzo 2026</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Informes <span>e Indicadores Gerenciales</span></h1>
+    <p class="hero-desc">Módulo centralizado para la extracción y visualización de datos operacionales, financieros y de cumplimiento con soporte para auditorías y doble moneda.</p>
+    <div class="hero-badges">
+      <span class="hero-badge">💱 Dualidad (VES/USD)</span>
+      <span class="hero-badge">📅 Períodos Flexibles</span>
+      <span class="hero-badge">🖨️ Formato Imprimible</span>
+      <span class="hero-badge">📊 Semáforos KPIs</span>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <aside class="sidebar">
+    <a href="index.html" class="back-link">← Volver al Índice General</a>
+    <div class="sidebar-title">📋 Contenido Informes</div>
+    <nav>
+      <a href="#s1"><span>01</span> Capacidades del Módulo</a>
+      <a href="#s2"><span>02</span> Dualidad Monetaria</a>
+      <a href="#s3"><span>03</span> Tipos de Períodos</a>
+      <a href="#s4"><span>04</span> Modos de Exportación</a>
+      <a href="#s5"><span>05</span> Visualización de KPIs</a>
+    </nav>
+  </aside>
+
+  <div class="content">
+
+    <!-- S1: CAPACIDADES -->
+    <section id="s1">
+      <div class="section-header"><div class="section-num">01</div><h2>Capacidades del Módulo</h2></div>
+      <p>El módulo <strong>Informes e Indicadores</strong> agrupa la información generada por Flota, Mantenimiento, Rutas y Costos. Permite a los gerentes de logística extraer análisis detallados del rendimiento mensual, proyectar costos, imprimir listados y validar el comportamiento de los choferes y proveedores.</p>
+      
+      <div class="alert-box info">
+        ℹ️ <strong>Certeza Criptográfica de Reportes:</strong> Todos los reportes generados desde el backend cuentan con un código de tiempo o de auditoría. Si las gerencias descargan un archivo PDF, tendrá trazabilidad del usuario que lo generó.
+      </div>
+    </section>
+
+    <!-- S2: DUALIDAD MONETARIA -->
+    <section id="s2">
+      <div class="section-header"><div class="section-num">02</div><h2>Dualidad Monetaria (VES y USD)</h2></div>
+      <p>Debido a la dinámica de mercado en Venezuela, el sistema permite visualizar todos los informes operativos en Bolívares (Moneda Legal, por defecto en los libros) o en Dólares Estadounidenses (Para análisis comparativo de presupuesto contable con Tasa Ref BCV).</p>
+      <p>Esta opción la gobierna un <strong>Toggle (Botón Interruptor)</strong> en vivo que convierte matemáticamente la tabla en base a la tasa de cambio de la fecha configurada.</p>
+
+      <div class="mock-dashboard">
+        <div class="mock-dash-header"><h4>Simulación del Toggle de Moneda</h4></div>
+        <div class="mock-dash-toolbar">
+          <button class="toolbar-btn" style="background:#f1f5f9;border-color:var(--azul);">⇄ Mostrar en Dólares (USD)</button>
+          <span style="font-size:0.8rem;color:var(--gris-medio);">Tasa Ref: 1 USD = 36.42 VES (Mar 2026)</span>
+        </div>
+        <div class="mock-dash-body">
+          <table class="pqv-table" style="margin:0;">
+            <thead><tr><th>Centro de Costo</th><th>Mes</th><th class="currency">Presupuesto</th><th class="currency">Ejecutado</th></tr></thead>
+            <tbody>
+              <tr><td>CECO-1010 Transporte</td><td>Marzo 2026</td><td class="currency">₭ 4,500,000</td><td class="currency" style="color:var(--rojo)">₭ 4,120,000</td></tr>
+              <tr><td>CECO-1020 Talleres</td><td>Marzo 2026</td><td class="currency">₭ 2,800,000</td><td class="currency" style="color:var(--verde)">₭ 1,950,000</td></tr>
+            </tbody>
+          </table>
+          
+          <div style="text-align:center; padding:15px; background:var(--gris-fondo); margin-top:10px; font-size:0.85rem; color:var(--gris-medio); border-radius:4px;">
+            <em>* Al hacer click en "Mostrar en USD", los montos se dividirán automáticamente entre la Tasa de Cambio (36.42).</em>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- S3: PERIODICIDAD -->
+    <section id="s3">
+      <div class="section-header"><div class="section-num">03</div><h2>Tipos de Períodos: Filtro de Tiempo</h2></div>
+      <p>Cualquier informe de SILT (Ej. Consumo de Combustible o Recorridos GPS) exige que se seleccione un lapso de tiempo. Los selectores están pre-diseñados (Q1, H1, Mensual, etc) para generar rápidamente el consolidado sin forzar ingreso manual de fechas.</p>
+
+      <ul style="margin-left:20px; line-height:2">
+        <li><strong>Mensual:</strong> Informes a nivel de mes (ej. Consumos de Gasoil en Agosto).</li>
+        <li><strong>Trimestral (Q1, Q2, Q3, Q4):</strong> Informes condensados por Cuartos Fiscales.</li>
+        <li><strong>Semestral / Anual:</strong> Recomendado para revisiones operativas generales de alto desgaste.</li>
+        <li><strong>Personalizado:</strong> Un rango [Desde - Hasta] para auditorías atípicas.</li>
+      </ul>
+
+      <div class="mock-dashboard" style="display:inline-block; padding:10px 20px;">
+        <label style="font-family:var(--font-display); font-size:0.9rem; font-weight:800; display:block; margin-bottom:4px; color:var(--azul);">📅 Selector de Período</label>
+        <select class="toolbar-select" style="width:250px;">
+          <option>Marzo 2026 (Mes Actual)</option>
+          <option>Q1 (Ene-Mar) 2026</option>
+          <option>Q4 (Oct-Dic) 2025</option>
+          <option>Anual (2025)</option>
+          <option>Fechas Personalizadas...</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- S4: EXPORTACIÓN -->
+    <section id="s4">
+      <div class="section-header"><div class="section-num">04</div><h2>Impresión y Exportación Estandarizada</h2></div>
+      <p>El diseño del módulo implementa hojas de estilo especiales <code>@media print</code>. De este modo, al pulsar imprimir, se eliminan paneles de navegación y botones y se reconfigura la fuente, inyectando un encabezado estricto gubernamental con el logo corporativo de Pequiven para ser adjuntado a expedientes firmados físicos.</p>
+
+      <div class="mock-dash-toolbar" style="border-radius:6px; border:1px solid var(--gris-borde); justify-content:center; gap:20px; background:#fff">
+        <button class="toolbar-btn primary">🖨️ Imprimir Formato Físico / Guardar PDF</button>
+        <button class="toolbar-btn">📊 Exportar a Excel (.xlsx)</button>
+        <button class="toolbar-btn">📑 Descargar CSV</button>
+      </div>
+    </section>
+
+    <!-- S5: KPIS Y SEMÁFOROS -->
+    <section id="s5">
+      <div class="section-header"><div class="section-num">05</div><h2>Visualización Integral de KPIs de Flota (Dashboard Final)</h2></div>
+      <p>Al seleccionar una unidad o un Centro de Costo, el Reporte cargará tarjetas con colores o "Semáforos". Estas luces indican si el indicador (KPI) logró el objetivo trazado por Logística.</p>
+
+      <div class="mock-dashboard">
+        <div class="mock-dash-header"><h4>Reporte Especial: Eficiencia de Combustible Vehículos Pesados</h4></div>
+        <div class="mock-dash-toolbar justify-between">
+          <div style="display:flex;gap:10px;">
+            <select class="toolbar-select"><option>Q1 (Ene-Mar) 2026</option></select>
+            <select class="toolbar-select"><option>División: Cargas Líquidas</option></select>
+          </div>
+          <div><button class="toolbar-btn primary">Generar Informe</button></div>
+        </div>
+        <div class="mock-dash-body">
+          
+          <div class="kpi-grid">
+            <div class="kpi-card blue">
+              <div class="kpi-label">Volumen Est. Combustible</div>
+              <div class="kpi-value">12.500 <span style="font-size:1rem">Lts</span></div>
+              <div class="kpi-sub">Proyectado Q1</div>
+            </div>
+            <div class="kpi-card green">
+              <div class="kpi-label">Volumen Real Despachado</div>
+              <div class="kpi-value">11.100 <span style="font-size:1rem">Lts</span></div>
+              <div class="kpi-sub"><span class="kpi-trend-down">↓ 11.2%</span> Ahorro logrado</div>
+            </div>
+            <div class="kpi-card red">
+              <div class="kpi-label">Incidentes Taller</div>
+              <div class="kpi-value">4</div>
+              <div class="kpi-sub"><span class="kpi-trend-up">↑ 1</span> vs Q4 pasado</div>
+            </div>
+            <div class="kpi-card yellow">
+              <div class="kpi-label">Costo por KM Promedio</div>
+              <div class="kpi-value">₭ 450.00</div>
+              <div class="kpi-sub">Leve incremento</div>
+            </div>
+          </div>
+
+          <div class="chart-fake">
+            <span>[Espacio Reservado para Gráfico de Líneas - Consumo vs Tiempo]</span>
+            <div style="margin-top:10px; font-size:0.75rem; color:#94a3b8;">Desarrollo usando bibliotecas como Chart.js o Recharts</div>
+          </div>
+
+          <h3 style="font-size:1rem; margin-top:30px;">Tabla Desglosada</h3>
+          <table class="pqv-table">
+            <thead>
+              <tr><th>Placa Unidad</th><th>Conductor Frecuente</th><th>Km Recorridos</th><th>Lts Consumidos</th><th>Costo Mntn (VES)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A5122</td><td>Pérez, Juan</td><td>8,540 Km</td><td>1,210 Lts</td><td class="currency">15,000</td></tr>
+              <tr><td>A00XY</td><td>Martínez, E.</td><td>10,210 Km</td><td>1,500 Lts</td><td class="currency">42,100</td></tr>
+              <tr><td>A99XX</td><td>López, M.</td><td>5,500 Km</td><td>780 Lts</td><td class="currency">8,500</td></tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div style="margin-bottom:20px">
+    <strong style="color:var(--amarillo);font-size:1.1rem;letter-spacing:.05em">SILT-PEQUIVEN</strong> — Gestión de Flota &nbsp;·&nbsp; Manual de Informes e Indicadores &nbsp;·&nbsp; v1.0
+  </div>
+  <div style="font-size:.9rem;color:#fff;opacity:1;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;max-width:600px;margin:0 auto;line-height:1.5">
+    <strong>Diseño y Arquitectura Documental: Oscar J. Martinez Paz</strong><br>
+    ✉️ ozmartinezpaz@gmail.com &nbsp;&nbsp;|&nbsp;&nbsp; 📱 (+58) 0424-2050125
+  </div>
+</footer>
+
+</body>
+</html>
