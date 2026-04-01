@@ -69,6 +69,37 @@
 
   footer { background: var(--azul); color: rgba(255,255,255,0.6); text-align: center; padding: 40px 32px; margin-top: auto; font-family: var(--font-display); font-size: 0.9rem; }
   footer strong { color: var(--amarillo); }
+  .timeline-section { background: var(--blanco); padding: 40px; border-radius: 8px; border: 1px solid var(--gris-borde); box-shadow: 0 4px 12px rgba(0,51,102,0.06); margin-top: 40px; }
+  .timeline-header { text-align: center; margin-bottom: 40px; }
+  .timeline-header h2 { font-family: var(--font-display); font-size: 2rem; color: var(--azul); font-weight: 800; letter-spacing: 0.05em; }
+  .timeline-header p { font-size: 1.1rem; color: var(--gris-medio); margin-top: 8px; }
+  
+  .timeline { position: relative; max-width: 800px; margin: 0 auto; padding-left: 30px; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--azul-claro); border-radius: 4px; }
+  
+  .timeline-item { position: relative; margin-bottom: 40px; }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-dot { position: absolute; left: -38px; top: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--azul); border: 4px solid #fff; box-shadow: 0 0 0 2px var(--azul-medio); }
+  .timeline-item.active .timeline-dot { background: var(--amarillo); border-color: #fff; box-shadow: 0 0 0 2px var(--amarillo); animation: pulse 2s infinite; }
+  
+  .timeline-content { background: var(--gris-fondo); padding: 20px 25px; border-radius: 8px; border: 1px solid var(--gris-borde); position: relative; }
+  .timeline-content::before { content: ''; position: absolute; left: -10px; top: 8px; border-width: 10px 10px 10px 0; border-style: solid; border-color: transparent var(--gris-borde) transparent transparent; }
+  .timeline-content::after { content: ''; position: absolute; left: -8px; top: 9px; border-width: 9px 9px 9px 0; border-style: solid; border-color: transparent var(--gris-fondo) transparent transparent; }
+  
+  .timeline-date { font-family: var(--font-display); font-size: 0.85rem; font-weight: 800; color: var(--rojo); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+  .timeline-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; color: var(--azul); margin-bottom: 10px; }
+  .timeline-desc { font-size: 0.95rem; color: var(--gris-texto); line-height: 1.6; }
+  
+  .timeline-badges { display: flex; gap: 8px; margin-top: 15px; flex-wrap: wrap; }
+  .t-badge { padding: 4px 10px; border-radius: 4px; font-family: var(--font-display); font-size: 0.75rem; font-weight: 700; background: #fff; border: 1px solid #cbd5e1; color: var(--gris-medio); letter-spacing: 0.05em; }
+  .t-badge.done { background: #ecfdf5; border-color: #a7f3d0; color: #047857; }
+  .t-badge.dev { background: #fffbeb; border-color: #fde68a; color: #b45309; }
+  .t-badge.pending { background: #f8fafc; border-color: #e2e8f0; color: #64748b; }
+
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 209, 0, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(255, 209, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 209, 0, 0); } }
+  
+  @media(max-width: 600px) { .timeline-content { padding: 15px; } }
+
 </style>
 </head>
 <body>
@@ -197,6 +228,66 @@
     </a>
 
   </div>
+
+  <!-- ── CRONOGRAMA DE IMPLEMENTACIÓN (3 MESES) ── -->
+  <section class="timeline-section">
+    
+    <div class="timeline-header">
+      <h2>Cronograma de Despliegue SILT</h2>
+      <p>Proyección de implementación estructurada en tres (3) meses, fundamentada en los avances consolidados del Core Logístico.</p>
+    </div>
+
+    <div class="timeline">
+      
+      <!-- MES 1 -->
+      <div class="timeline-item active">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">MES 1 — 100% COMPLETADO (Despliegue)</div>
+          <h3 class="timeline-title">Core Operativo y Piloto de Transporte</h3>
+          <p class="timeline-desc">Despliegue de los módulos base (Conductores, Vehículos, Combustible). Carga inicial de datos de la flota adscrita a Morón / El Tablazo. Entrenamiento a los analistas de transporte y configuración de la topología de la base de datos central en servidores seguros de PEQUIVEN.</p>
+          <div class="timeline-badges">
+            <span class="t-badge done">✔ Vehículos & Conductores</span>
+            <span class="t-badge done">✔ Control Combustible</span>
+            <span class="t-badge dev">⚙️ Integración LDAP</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MES 2 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">MES 2 — Aceleración Operativa</div>
+          <h3 class="timeline-title">Traslados, Taller de Mantenimiento y App Móvil</h3>
+          <p class="timeline-desc">Lanzamiento del ciclo completo de Solicitudes de Viaje y aprobación gerencial. Implementación en los Talleres internos para gestionar Órdenes de Trabajo y control de inventario de repuestos. Pruebas de campo de la App Móvil para conductores (PWA) en rutas foráneas.</p>
+          <div class="timeline-badges">
+            <span class="t-badge done">✔ Diseño Documental</span>
+            <span class="t-badge dev">⚙️ Desarrollo React/Nest</span>
+            <span class="t-badge pending">⏳ App Conductores V1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MES 3 -->
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">MES 3 — Cierre Financiero y Go-Live Nacional</div>
+          <h3 class="timeline-title">Inteligencia Financiera y Despliegue General</h3>
+          <p class="timeline-desc">Habilitación del motor contable (MOD-19) y dashboard gerencial (MOD-20). Vinculación con libro de compras y retenciones SENIAT. Capacitación final a directivos y arranque oficial (Go-Live) consolidando todas las sedes de Transporte a nivel Nacional sin interrupciones.</p>
+          <div class="timeline-badges">
+            <span class="t-badge done">✔ Maquetas Financieras UI</span>
+            <span class="t-badge pending">⏳ Lógica de Cubos OLAP</span>
+            <span class="t-badge pending">⏳ Go-Live Oficial SILT</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
 
 <footer>
